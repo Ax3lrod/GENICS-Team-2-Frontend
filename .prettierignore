@@ -1,0 +1,8 @@
+.next
+node_modules
+package.json
+.prettierrc
+next.config
+postcss.config
+tailwind.config
+tsconfig.json
