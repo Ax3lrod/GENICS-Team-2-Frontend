@@ -36,7 +36,7 @@ export default function NextImage({
   ...rest
 }: NextImageProps) {
   const [status, setStatus] = React.useState(
-    useSkeleton ? 'loading' : 'complete'
+    useSkeleton ? 'loading' : 'complete',
   );
   const widthIsSet = className?.includes('w-') ?? false;
 
@@ -49,7 +49,7 @@ export default function NextImage({
         className={clsxm(
           imgClassName,
           status === 'loading' &&
-            clsxm('animate-pulse bg-red-50', blurClassName)
+            clsxm('animate-pulse bg-red-50', blurClassName),
         )}
         src={serverStaticImg ? src : '/images' + src}
         width={width}

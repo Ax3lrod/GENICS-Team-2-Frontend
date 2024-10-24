@@ -6,3 +6,6 @@ next.config
 postcss.config
 tailwind.config
 tsconfig.json
+dist
+build
+coverage
