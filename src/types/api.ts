@@ -1,4 +1,3 @@
-
 export type PaginateData<Data> = {
   data_per_page: Data;
   meta: {
