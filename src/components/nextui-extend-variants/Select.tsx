@@ -24,6 +24,11 @@ export const FormSelect = extendVariants(Select, {
         input: 'text-medium text-default-500 placeholder-default-500',
         label: 'text-xl pr-[21px]',
       },
+      search: {
+        trigger: 'w-[146px] h-[64px] min-h-[64px] rounded-none bg-white',
+        input: 'text-medium text-black placeholder-default-500',
+        label: 'text-xl pr-[21px]',
+      },
     },
     labelPlacement: {
       inside: {

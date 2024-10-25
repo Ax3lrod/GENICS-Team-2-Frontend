@@ -11,12 +11,16 @@ import clsxm from '@/lib/clsxm';
 
 type InputProps = {
   id: string;
+  radius?: any;
+  size?: any;
+  classNames?: any;
   variant?: 'bordered' | 'flat' | 'underlined' | 'faded' | undefined;
   label?: string;
+  children?: any;
   placeholder?: string;
   validation?: RegisterOptions;
   labelPlacement?: 'inside' | 'outside' | 'outside-left' | undefined;
-  className?: string;
+  className?: any;
   isRequired?: boolean;
   isInvalid?: boolean;
   description?: string;
@@ -38,6 +42,7 @@ export default function Input({
   id,
   variant,
   validation,
+  size,
   label,
   placeholder,
   labelPlacement,
@@ -49,29 +54,31 @@ export default function Input({
   onValueChange,
   type,
   isDisabled,
-  errorMessage,
+  radius,
+  classNames,
+  // errorMessage,
   startContent,
   defaultValue,
 }: InputProps) {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+  // const {
+  //   register,
+  //   formState: { errors },
+  // } = useFormContext();
 
-  const error = get(errors, id);
+  // const error = get(errors, id);
   return (
     <FormInput
-      {...register(id, validation)}
+      // {...register(id, validation)}
       variant={variant}
       label={label}
       placeholder={placeholder}
       labelPlacement={labelPlacement}
       className={clsxm(className)}
       isRequired={isRequired}
-      isInvalid={error ? true : false}
-      errorMessage={
-        typeof errorMessage === 'function' ? errorMessage(error) : errorMessage
-      }
+      // isInvalid={error ? true : false}
+      // errorMessage={
+      //   typeof errorMessage === 'function' ? errorMessage(error) : errorMessage
+      // }
       description={description}
       startContent={startContent}
       endContent={endContent}
@@ -80,6 +87,9 @@ export default function Input({
       type={type}
       isDisabled={isDisabled}
       defaultValue={defaultValue}
+      radius={radius}
+      size={size}
+      classNames={classNames}
     />
   );
 }
