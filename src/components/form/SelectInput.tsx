@@ -11,16 +11,20 @@ import { FormSelect } from '@/components/nextui-extend-variants/Select';
 import clsxm from '@/lib/clsxm';
 
 type SelectProps = {
-  id: string;
-  label: string;
+  id?: string;
+  label?: string;
+  color?: any;
+  radius?: any;
+  size?: string;
+  classNames?: any;
   placeholder?: string;
-  variant: 'bordered' | 'flat' | 'underlined' | 'faded' | undefined;
-  labelPlacement: 'inside' | 'outside' | 'outside-left' | undefined;
+  variant?: 'bordered' | 'flat' | 'underlined' | 'faded' | undefined;
+  labelPlacement?: 'inside' | 'outside' | 'outside-left' | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children?: any;
   validation?: RegisterOptions;
-  className?: string;
-  option: string;
+  className?: any;
+  option?: string;
   onChangeFn?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   isDisabled?: boolean;
   isRequired?: boolean;
@@ -36,6 +40,7 @@ export default function SelectInput({
   variant,
   placeholder,
   labelPlacement,
+  size,
   validation,
   children,
   className,
@@ -45,45 +50,54 @@ export default function SelectInput({
   isRequired,
   description,
   errorMessage,
+  radius,
+  color,
+  classNames,
 }: SelectProps) {
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext();
+  // const {
+  //   control,
+  //   formState: { errors },
+  // } = useFormContext();
 
-  const error = get(errors, id);
+  // const error = get(errors, id);
   return (
-    <Controller
-      control={control}
-      name={id}
-      rules={validation}
-      render={({ field }) => (
-        <FormSelect
-          label={label}
-          variant={variant}
-          placeholder={placeholder}
-          labelPlacement={labelPlacement}
-          className={clsxm(className, error && 'rounded-xl bg-red-200')}
-          onChange={(e) => {
-            field.onChange(e);
-            if (onChangeFn) {
-              onChangeFn(e);
-            }
-          }}
-          errorMessage={
-            errorMessage && typeof errorMessage === 'function'
-              ? errorMessage(error)
-              : errorMessage
-          }
-          isDisabled={isDisabled}
-          {...(option ? { selectedKeys: [option] } : {})}
-          value={field.value}
-          isRequired={isRequired}
-          description={description}
-        >
-          {children}
-        </FormSelect>
-      )}
-    />
+    // <Controller
+    //   control={control}
+    //   name={id}
+    //   rules={validation}
+    //   render={({ field }) => (
+    <FormSelect
+      label={label}
+      variant={variant}
+      placeholder={placeholder}
+      labelPlacement={labelPlacement}
+      className={clsxm(className, {
+        /*error && 'rounded-xl bg-red-200'*/
+      })}
+      // onChange={(e) => {
+      //   field.onChange(e);
+      //   if (onChangeFn) {
+      //     onChangeFn(e);
+      //   }
+      // }}
+      // errorMessage={
+      //   errorMessage && typeof errorMessage === 'function'
+      //     ? errorMessage(error)
+      //     : errorMessage
+      // }
+      isDisabled={isDisabled}
+      {...(option ? { selectedKeys: [option] } : {})}
+      // value={field.value}
+      isRequired={isRequired}
+      description={description}
+      radius={radius}
+      size={size}
+      color={color}
+      classNames={classNames}
+    >
+      {children}
+    </FormSelect>
+    // )}
+    // />
   );
 }
