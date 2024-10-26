@@ -1,29 +1,48 @@
 import * as React from 'react';
+import { SelectItem } from '@nextui-org/react';
 import {
-  Controller,
+  // Controller,
   FieldError,
-  get,
+  // get,
   RegisterOptions,
-  useFormContext,
+  // useFormContext,
 } from 'react-hook-form';
 
 import { FormSelect } from '@/components/nextui-extend-variants/Select';
 import clsxm from '@/lib/clsxm';
 
+type classNames = {
+  base?: string;
+  input?: string | string[];
+  inputWrapper?: string;
+  label?: string;
+  helperText?: string;
+  clearButton?: string;
+  startContent?: string;
+  endContent?: string;
+  trigger?: string;
+};
+
 type SelectProps = {
   id?: string;
   label?: string;
-  color?: any;
-  radius?: any;
-  size?: string;
-  classNames?: any;
+  color?:
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning'
+    | 'danger';
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  size?: 'sm' | 'md' | 'lg';
+  classNames?: classNames;
   placeholder?: string;
   variant?: 'bordered' | 'flat' | 'underlined' | 'faded' | undefined;
   labelPlacement?: 'inside' | 'outside' | 'outside-left' | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  children?: any;
+  children?: JSX.Element | JSX.Element[];
   validation?: RegisterOptions;
-  className?: any;
+  className?: string;
   option?: string;
   onChangeFn?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   isDisabled?: boolean;
@@ -35,21 +54,21 @@ type SelectProps = {
 } & React.ComponentPropsWithoutRef<'select'>;
 
 export default function SelectInput({
-  id,
+  // id,
   label,
   variant,
   placeholder,
   labelPlacement,
   size,
-  validation,
+  // validation,
   children,
   className,
   option,
-  onChangeFn,
+  // onChangeFn,
   isDisabled,
   isRequired,
   description,
-  errorMessage,
+  // errorMessage,
   radius,
   color,
   classNames,

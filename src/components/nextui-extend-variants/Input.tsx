@@ -24,11 +24,6 @@ export const FormInput = extendVariants(Input, {
         input: 'text-medium text-default-500 placeholder-default-500',
         label: 'text-xl pr-[21px]',
       },
-      search: {
-        inputWrapper: 'w-[800px] h-[64px] min-h-[64px] rounded-none rounded-l-[10px] bg-white',
-        input: 'text-medium text-black placeholder-default-500',
-        label: 'text-xl pr-[21px]',
-      }
     },
     labelPlacement: {
       inside: {

@@ -3,7 +3,7 @@ import SelectInput from './SelectInput';
 import { Button } from '@nextui-org/react';
 import React from 'react';
 
-export default function SearchFilter({ children }: any) {
+export default function SearchFilter(children: JSX.Element) {
   return (
     <div className='flex flex-row justify-center items-end'>
       <Input
@@ -12,7 +12,10 @@ export default function SearchFilter({ children }: any) {
         classNames={{
           inputWrapper:
             'w-[800px] h-[64px] min-h-[64px] rounded-none rounded-l-[10px] bg-white dark:bg-white',
-          input: ['text-black/90 dark:text-black/90', 'placeholder:text-default-700/50'],
+          input: [
+            'text-black/90 dark:text-black/90',
+            'placeholder:text-default-700/50',
+          ],
           label: 'text-xl text-black pr-[21px]',
         }}
       />
@@ -21,7 +24,10 @@ export default function SearchFilter({ children }: any) {
         classNames={{
           trigger:
             'w-[146px] h-[64px] min-h-[64px] rounded-none bg-white dark:bg-white',
-          input: ['text-black/90 dark:text-black/90', 'placeholder:text-default-700/50'],
+          input: [
+            'text-black/90 dark:text-black/90',
+            'placeholder:text-default-700/50',
+          ],
           label: 'text-xl text-black pr-[21px]',
         }}
       >
