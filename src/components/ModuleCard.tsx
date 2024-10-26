@@ -4,11 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ModuleDetail } from '@/types/module/module';
 import { Button } from '@/components/nextui-extend-variants/Button';
+import clsxm from '@/lib/clsxm';
 
 type ModuleCardProps = {
   detailUrl: string;
   illustrationUrl: string;
   moduleData: ModuleDetail;
+  isActive?: boolean;
   onLike?: () => void;
   onDislike?: () => void;
 };
@@ -17,6 +19,7 @@ export default function ModuleCard({
   moduleData,
   illustrationUrl,
   detailUrl,
+  isActive = false,
   onLike,
   onDislike,
   ...attrs
@@ -24,7 +27,10 @@ export default function ModuleCard({
   return (
     <div
       {...attrs}
-      className='bg-primary-50 px-9 py-7 rounded-lg flex flex-col gap-3 min-h-[348px] w-full max-w-[365px]'
+      className={clsxm(
+        'bg-primary-50 px-9 py-7 rounded-lg flex flex-col gap-3 min-h-[348px] w-full max-w-[365px] shadow-card',
+        isActive && 'border-2 border-primary',
+      )}
     >
       <div className='flex justify-between gap-4 w-full'>
         <Image
