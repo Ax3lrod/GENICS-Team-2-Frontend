@@ -29,7 +29,7 @@ export default function NavbarLayout() {
           <Image
             height={78}
             width={136}
-            src='/images/shareits-logo.png'
+            src='/images/logo.png'
             alt='logo'
             className='h-full w-fit object-contain'
           />
