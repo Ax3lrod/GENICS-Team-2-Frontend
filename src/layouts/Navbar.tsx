@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/nextui-extend-variants/Button';
+import { menuItems } from '@/contents/menuItems';
 import {
   Navbar,
   NavbarBrand,
@@ -18,23 +19,11 @@ import { useState } from 'react';
 export default function NavbarLayout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = [
-    {
-      label: 'Home',
-      href: '/',
-    },
-    {
-      label: 'Modules',
-      href: '/modules',
-    },
-    {
-      label: 'Lecturer Feedback',
-      href: '/lecturer-feedback',
-    },
-  ];
-
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className='py-8'>
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      className='py-4 bg-white bg-opacity-90'
+    >
       <NavbarContent className='flex justify-between'>
         <NavbarBrand className='h-full'>
           <Image
@@ -51,7 +40,10 @@ export default function NavbarLayout() {
         />
       </NavbarContent>
 
-      <NavbarContent className='hidden md:flex gap-4' justify='center'>
+      <NavbarContent
+        className='hidden md:flex gap-4 md:gap-10 lg:gap-20'
+        justify='center'
+      >
         {menuItems.map((menu, index) => (
           <NavbarItem key={`${menu.label}-${index}`}>
             <Link color='primary' href={menu.href}>
@@ -60,7 +52,7 @@ export default function NavbarLayout() {
           </NavbarItem>
         ))}
       </NavbarContent>
-      <NavbarContent justify='end' className='hidden md:flex gap-3'>
+      <NavbarContent justify='end' className='hidden md:flex gap-4'>
         <NavbarItem>
           <Button as={Link} color='primary' href='/login' variant='solid'>
             Login
@@ -72,7 +64,7 @@ export default function NavbarLayout() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu className='pt-20'>
+      <NavbarMenu className='pt-20 bg-white bg-opacity-90'>
         {menuItems.map((menu, index) => (
           <NavbarMenuItem key={`mobile-${menu.label}-${index}`}>
             <Link
@@ -86,12 +78,24 @@ export default function NavbarLayout() {
           </NavbarMenuItem>
         ))}
         <NavbarMenuItem>
-          <Button as={Link} color='primary' href='/login' variant='solid' className='w-full'>
+          <Button
+            as={Link}
+            color='primary'
+            href='/login'
+            variant='solid'
+            className='w-full'
+          >
             Login
           </Button>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Button as={Link} color='primary' href='/signup' variant='bordered' className='w-full'>
+          <Button
+            as={Link}
+            color='primary'
+            href='/signup'
+            variant='bordered'
+            className='w-full'
+          >
             Sign Up
           </Button>
         </NavbarMenuItem>

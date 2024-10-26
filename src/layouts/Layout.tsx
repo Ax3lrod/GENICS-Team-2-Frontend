@@ -16,6 +16,7 @@ export default function Layout({
     <>
       {withNavbar && <Navbar />}
       {children}
+      {withFooter && <Footer />}
     </>
   );
 }
