@@ -1,26 +1,36 @@
 import React from 'react';
 import {
   FieldError,
-  get,
+  // get,
   RegisterOptions,
-  useFormContext,
+  // useFormContext,
 } from 'react-hook-form';
 
 import { FormInput } from '@/components/nextui-extend-variants/Input';
 import clsxm from '@/lib/clsxm';
 
+type classNames = {
+  base?: string;
+  input?: string | string[];
+  inputWrapper?: string;
+  label?: string;
+  helperText?: string;
+  clearButton?: string;
+  startContent?: string;
+  endContent?: string;
+};
+
 type InputProps = {
   id: string;
-  radius?: any;
-  size?: any;
-  classNames?: any;
+  radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  size?: 'sm' | 'md' | 'lg';
+  classNames?: classNames;
   variant?: 'bordered' | 'flat' | 'underlined' | 'faded' | undefined;
   label?: string;
-  children?: any;
   placeholder?: string;
   validation?: RegisterOptions;
   labelPlacement?: 'inside' | 'outside' | 'outside-left' | undefined;
-  className?: any;
+  className?: string;
   isRequired?: boolean;
   isInvalid?: boolean;
   description?: string;
@@ -39,9 +49,9 @@ type InputProps = {
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export default function Input({
-  id,
+  // id,
   variant,
-  validation,
+  // validation,
   size,
   label,
   placeholder,
