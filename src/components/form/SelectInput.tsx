@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SelectItem } from '@nextui-org/react';
 import {
   // Controller,
   FieldError,
