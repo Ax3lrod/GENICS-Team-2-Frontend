@@ -54,12 +54,17 @@ export default function NavbarLayout() {
       </NavbarContent>
       <NavbarContent justify='end' className='hidden md:flex gap-4'>
         <NavbarItem>
-          <Button as={Link} color='primary' href='/login' variant='solid'>
+          <Button as={Link} color='primary' href='/auth/login' variant='solid'>
             Login
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color='primary' href='/signup' variant='bordered'>
+          <Button
+            as={Link}
+            color='primary'
+            href='/auth/register'
+            variant='bordered'
+          >
             Sign Up
           </Button>
         </NavbarItem>
@@ -81,7 +86,7 @@ export default function NavbarLayout() {
           <Button
             as={Link}
             color='primary'
-            href='/login'
+            href='/auth/login'
             variant='solid'
             className='w-full'
           >
@@ -92,7 +97,7 @@ export default function NavbarLayout() {
           <Button
             as={Link}
             color='primary'
-            href='/signup'
+            href='/auth/register'
             variant='bordered'
             className='w-full'
           >
