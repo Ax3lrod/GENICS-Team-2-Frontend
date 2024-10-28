@@ -1,3 +1,4 @@
+'use client';
 import { extendVariants, Input } from '@nextui-org/react';
 
 export const FormInput = extendVariants(Input, {

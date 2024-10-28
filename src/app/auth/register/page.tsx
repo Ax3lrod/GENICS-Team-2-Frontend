@@ -1,5 +1,4 @@
 'use client';
-
 import NextImage from '@/components/NextImage';
 import Input from '@/components/form/Input';
 import { Button } from '@/components/nextui-extend-variants/Button';
@@ -17,7 +16,7 @@ export default function Register() {
   return (
     <>
       {step == 0 && (
-        <div className='flex flex-col w-full h-full lg:flex-row bg-white'>
+        <div className='flex flex-col w-full h-full justify-center items-center lg:flex-row bg-white'>
           <section className='relative flex flex-col justify-center items-center w-full h-full '>
             <div className='w-full h-full'>
               <NextImage
@@ -25,7 +24,7 @@ export default function Register() {
                 alt='Asset register'
                 width={747}
                 height={1026}
-                className='w-full h-full xl:-translate-x-[121px]'
+                className='w-full h-full'
                 imgClassName='w-full h-full'
               />
               <div className='absolute z-0 w-fit h-fit top-11 left-11'>
@@ -77,7 +76,10 @@ export default function Register() {
           </section>
           <section className='flex flex-col justify-center items-center w-full h-full py-[93px] px-[32px] md:px-[109px] gap-[30px]'>
             <div className='flex flex-col justify-center items-center w-full h-full'>
-              <p className='text-5xl lg:text-4xl'> Create your Account </p>
+              <p className='text-5xl font-semibold lg:text-4xl'>
+                {' '}
+                Create your Account{' '}
+              </p>
             </div>
             <div className='flex flex-col w-full h-full gap-11'>
               <div className='flex w-full h-full'>
@@ -115,7 +117,7 @@ export default function Register() {
                 color='primary'
                 className='w-full h-[44px]'
               >
-                Create Account
+                Continue
               </Button>
             </div>
             <div className='flex w-full h-full items-center'>

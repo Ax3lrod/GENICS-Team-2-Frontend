@@ -1,3 +1,4 @@
+'use client';
 import { extendVariants, Select } from '@nextui-org/react';
 
 export const FormSelect = extendVariants(Select, {
