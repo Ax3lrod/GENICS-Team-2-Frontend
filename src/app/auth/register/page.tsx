@@ -1,6 +1,7 @@
 'use client';
-import NextImage from '@/components/NextImage';
+
 import Input from '@/components/form/Input';
+import NextImage from '@/components/NextImage';
 import { Button } from '@/components/nextui-extend-variants/Button';
 import Link from 'next/link';
 import LogoGoogle from '@/contents/LogoGoogle';
