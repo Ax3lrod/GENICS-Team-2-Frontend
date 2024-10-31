@@ -40,7 +40,7 @@ type SelectProps = {
   variant?: 'bordered' | 'flat' | 'underlined' | 'faded' | undefined;
   labelPlacement?: 'inside' | 'outside' | 'outside-left' | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  children?: JSX.Element | JSX.Element[];
+  children?: any;
   validation?: RegisterOptions;
   className?: string;
   option?: string;
@@ -105,8 +105,8 @@ export default function SelectInput({
       //     : errorMessage
       // }
       isDisabled={isDisabled}
-      {...(option ? { selectedKeys: [option] } : {})}
-      // value={field.value}
+      {...(option ? { value: option } : {})}
+      //value={field.value}
       isRequired={isRequired}
       description={description}
       radius={radius}

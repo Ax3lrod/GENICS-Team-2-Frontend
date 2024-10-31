@@ -1,9 +1,13 @@
+'use client';
 import Input from './Input';
 import SelectInput from './SelectInput';
 import { Button } from '@nextui-org/react';
-import React from 'react';
 
-export default function SearchFilter(children: JSX.Element) {
+export default function SearchFilter({
+  children,
+}: {
+  children?: React.ReactNode[];
+}) {
   return (
     <div className='flex flex-row justify-center items-end'>
       <Input
