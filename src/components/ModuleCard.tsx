@@ -6,7 +6,7 @@ import { ModuleDetail } from '@/types/module/module';
 import { Button } from '@/components/nextui-extend-variants/Button';
 import clsxm from '@/lib/clsxm';
 
-type ModuleCardProps = {
+export type ModuleCardProps = {
   detailUrl: string;
   illustrationUrl: string;
   moduleData: ModuleDetail;
