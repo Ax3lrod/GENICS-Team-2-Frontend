@@ -5,10 +5,10 @@ export const menuItems = [
   },
   {
     label: 'Modules',
-    href: '/modules',
+    href: '/module',
   },
   {
     label: 'Lecturer Feedback',
-    href: '/lecturer-feedback',
+    href: '/lecture',
   },
 ];
