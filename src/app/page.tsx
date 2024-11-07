@@ -50,7 +50,9 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <section className='flex flex-col w-full h-full py-72 px-52 rounded-[30px] justify-center items-center bg-primary-500'>
+          {/*Section 2*/}
+          <section className='relative flex flex-col w-full h-full py-72 px-52 rounded-[30px] justify-center items-center bg-primary-500'>
+            {/*Content*/}
             <div className='flex flex-col gap-11 justify-center items-center'>
               <h1 className='font-semibold text-[55px] text-white'>
                 Search modules or Lecturer
@@ -64,6 +66,44 @@ export default function Home() {
                 </SelectItem>
               </SearchFilter>
             </div>
+            {/*Background*/}
+            <div className='absolute z-0 w-fit h-fit bottom-0 left-6'>
+              <NextImage
+                src='/landing-page/asset-1.png'
+                alt='Asset landing page'
+                width={397}
+                height={204}
+                className='max-w-full h-auto'
+              />
+            </div>
+            <div className='absolute z-0 w-fit h-fit top-[182px] left-32'>
+              <NextImage
+                src='/landing-page/asset-2.png'
+                alt='Asset landing page'
+                width={75}
+                height={46}
+                className='max-w-full h-auto'
+              />
+            </div>
+            <div className='absolute z-0 w-fit h-fit top-24 right-4'>
+              <NextImage
+                src='/landing-page/asset-3.png'
+                alt='Asset landing page'
+                width={97}
+                height={66}
+                className='max-w-full h-auto'
+              />
+            </div>
+          </section>
+          <section className='flex flex-col mt-20 justify-center items-center'>
+            <div>
+              <h1 className='text-[64px]'>Module List</h1>
+              <p>
+                Access a variety of engaging course modules to expand your
+                knowledge and skills with shareITS
+              </p>
+            </div>
+            <div></div>
           </section>
         </main>
       </Layout>
