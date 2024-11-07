@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useForm, FormProvider } from 'react-hook-form';
 import { ApiResponse } from '@/types/api';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
@@ -45,13 +46,17 @@ export default function Login() {
         const errorDetails = await response.json();
         console.log('Error details:', errorDetails);
         setErrorMessage(errorDetails.message || 'Login failed');
+        toast.error(errorDetails.message || 'Login failed');
         return;
       }
 
       const result: ApiResponse<{ token?: string }> = await response.json();
+      toast.success('Login successful');
       console.log('Login successful:', result.data);
+      router.push('/');
     } catch (error) {
       setErrorMessage('An error occurred during login');
+      toast.error('An error occurred during login');
       console.error('Login error:', error);
     }
   };
