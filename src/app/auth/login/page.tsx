@@ -7,7 +7,7 @@ import Input from '@/components/form/Input';
 import Image from 'next/image';
 import { useForm, FormProvider } from 'react-hook-form';
 import { ApiResponse } from '@/types/api';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
@@ -16,9 +16,14 @@ export default function Login() {
     username: string;
     password: string;
   }
-  
+
   const methods = useForm<LoginFormInputs>();
-  const { handleSubmit, setValue, watch, formState: { errors } } = methods;
+  const {
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = methods;
   const [errorMessage, setErrorMessage] = React.useState('');
   const router = useRouter();
 
@@ -33,18 +38,18 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password }),
       });
-      
+
       console.log('Response:', response);
-      
+
       if (!response.ok) {
         const errorDetails = await response.json();
         console.log('Error details:', errorDetails);
         setErrorMessage(errorDetails.message || 'Login failed');
         return;
       }
-      
+
       const result: ApiResponse<{ token?: string }> = await response.json();
-      console.log('Login successful:', result.data);      
+      console.log('Login successful:', result.data);
     } catch (error) {
       setErrorMessage('An error occurred during login');
       console.error('Login error:', error);
@@ -56,9 +61,12 @@ export default function Login() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(handleLogin)} className='w-screen h-screen flex bg-white'>
+      <form
+        onSubmit={handleSubmit(handleLogin)}
+        className='w-screen h-screen flex bg-white'
+      >
         <section className='lg:w-[60%] w-[100%] h-full flex justify-center items-center min-w-[350px]'>
-          <button type="button" onClick={() => router.push('/')}>
+          <button type='button' onClick={() => router.push('/')}>
             <Image
               src='/images/login/loginbackbutton.png'
               alt='Back Button'
@@ -105,7 +113,9 @@ export default function Login() {
                 errorMessage={errors.password?.message}
               />
             </div>
-            {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+            {errorMessage && (
+              <p className='text-red-500 text-sm'>{errorMessage}</p>
+            )}
             <div className='flex w-full justify-between'>
               <div className='flex items-center'>
                 <Checkbox>
