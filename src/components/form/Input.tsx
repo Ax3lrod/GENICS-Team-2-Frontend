@@ -1,10 +1,9 @@
-'use client';
 import React from 'react';
 import {
   FieldError,
-  // get,
+  get,
   RegisterOptions,
-  // useFormContext,
+  useFormContext,
 } from 'react-hook-form';
 
 import { FormInput } from '@/components/nextui-extend-variants/Input';
@@ -50,9 +49,9 @@ type InputProps = {
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export default function Input({
-  // id,
+  id,
   variant,
-  // validation,
+  validation,
   size,
   label,
   placeholder,
@@ -67,29 +66,30 @@ export default function Input({
   isDisabled,
   radius,
   classNames,
-  // errorMessage,
+  errorMessage,
   startContent,
   defaultValue,
 }: InputProps) {
-  // const {
-  //   register,
-  //   formState: { errors },
-  // } = useFormContext();
+  const formContext = useFormContext();
 
-  // const error = get(errors, id);
+  const register = formContext ? formContext.register : () => {};
+  const errors = formContext ? formContext.formState.errors : {};
+
+  const error = get(errors, id) as FieldError | undefined;
+
   return (
     <FormInput
-      // {...register(id, validation)}
+      {...register(id, validation)}
       variant={variant}
       label={label}
       placeholder={placeholder}
       labelPlacement={labelPlacement}
       className={clsxm(className)}
       isRequired={isRequired}
-      // isInvalid={error ? true : false}
-      // errorMessage={
-      //   typeof errorMessage === 'function' ? errorMessage(error) : errorMessage
-      // }
+      isInvalid={Boolean(error)}
+      errorMessage={
+        typeof errorMessage === 'function' ? errorMessage(error) : errorMessage
+      }
       description={description}
       startContent={startContent}
       endContent={endContent}
