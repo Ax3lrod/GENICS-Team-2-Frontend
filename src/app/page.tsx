@@ -6,8 +6,30 @@ import SearchFilter from '@/components/form/SearchFilter';
 import * as React from 'react';
 import { Button } from '@/components/nextui-extend-variants/Button';
 import Link from 'next/link';
+import ModuleCard from '@/components/ModuleCard';
 
 export default function Home() {
+  const ModuleDetail = {
+    id: '01',
+    title: 'Object-Oriented Programming',
+    description:
+      'Start your journey in web development by exploring the basics of HTML, CSS, and JavaScript.',
+    upvotes: 10,
+    downvotes: 2,
+    createdAt: '10-11-2024',
+    updatedAt: '10-11-2024',
+    user: {
+      username: 'awan',
+    },
+  };
+
+  const Data = {
+    detailUrl: 'www.google.com',
+    illustrationUrl: '/images/loginawan1.png',
+    moduleData: ModuleDetail,
+    isActive: true,
+  };
+
   return (
     <>
       <Layout>
@@ -95,15 +117,57 @@ export default function Home() {
               />
             </div>
           </section>
-          <section className='flex flex-col mt-20 justify-center items-center'>
-            <div>
-              <h1 className='text-[64px]'>Module List</h1>
-              <p>
+          <section className='flex flex-col py-20 justify-center items-center h-full w-full'>
+            <div className='flex flex-col justify-center items-center mb-[78px]'>
+              <h1 className='text-[64px] font-bold '>Module List</h1>
+              <p className='text-2xl max-w-[774px] text-center'>
                 Access a variety of engaging course modules to expand your
                 knowledge and skills with shareITS
               </p>
             </div>
-            <div></div>
+            <div className='flex flex-wrap justify-center items-center gap-6'>
+              <ModuleCard
+                illustrationUrl={Data.illustrationUrl}
+                moduleData={Data.moduleData}
+                detailUrl={Data.detailUrl}
+              />
+              <ModuleCard
+                illustrationUrl={Data.illustrationUrl}
+                moduleData={Data.moduleData}
+                detailUrl={Data.detailUrl}
+              />
+              <ModuleCard
+                illustrationUrl={Data.illustrationUrl}
+                moduleData={Data.moduleData}
+                detailUrl={Data.detailUrl}
+              />
+              <ModuleCard
+                illustrationUrl={Data.illustrationUrl}
+                moduleData={Data.moduleData}
+                detailUrl={Data.detailUrl}
+              />
+              <ModuleCard
+                illustrationUrl={Data.illustrationUrl}
+                moduleData={Data.moduleData}
+                detailUrl={Data.detailUrl}
+              />
+              <ModuleCard
+                illustrationUrl={Data.illustrationUrl}
+                moduleData={Data.moduleData}
+                detailUrl={Data.detailUrl}
+              />
+            </div>
+            <div>
+              <Button
+                as={Link}
+                size='sm'
+                color='primary'
+                href='www.google.com'
+                className='mt-24'
+              >
+                See More
+              </Button>
+            </div>
           </section>
         </main>
       </Layout>
