@@ -1,21 +1,22 @@
 import { ApiResponse } from '@/types/api';
 
 export type RegisterRequest = {
-  name: string;
+  username: string;
   email: string;
+  faculty: string;
+  major: string;
   password: string;
-  phone_number: string;
-  tahu_ise_darimana: string;
-  jenjang: string;
-  provinsi: number;
 };
 
 export type RegisterResponse = ApiResponse<{
-  name: string;
+  id: string;
+  username: string;
   email: string;
-  phone_number: string;
-  tahu_ise_darimana: string;
-  jenjang: string;
-  provinsi: string;
-  is_email_verfied: boolean;
+  faculty: string;
+  major: string;
+  password: string;
+  passwordResetToken: null;
+  passwordResetExpires: null;
+  createdAt: string;
+  updatedAt: string;
 }>;

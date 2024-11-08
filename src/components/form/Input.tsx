@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   FieldError,
@@ -40,9 +41,6 @@ type InputProps = {
   errorMessage?:
     | React.ReactNode
     | ((error: FieldError | undefined) => React.ReactNode);
-  onChange?: (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => void | React.ChangeEvent<HTMLInputElement>;
   isDisabled?: boolean;
   onValueChange?: ((value: string) => void) | undefined;
   type?: string | undefined;
@@ -60,7 +58,6 @@ export default function Input({
   isRequired,
   description,
   endContent,
-  onChange,
   onValueChange,
   type,
   isDisabled,
@@ -94,7 +91,6 @@ export default function Input({
       startContent={startContent}
       endContent={endContent}
       onValueChange={onValueChange}
-      onChange={onChange}
       type={type}
       isDisabled={isDisabled}
       defaultValue={defaultValue}

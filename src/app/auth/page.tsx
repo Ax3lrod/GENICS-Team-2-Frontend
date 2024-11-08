@@ -7,8 +7,10 @@ export default function Auth() {
     <>
       <main className='flex flex-col items-center justify-center w-full h-full pt-[145px] pb-[98px] gap-[70px]'>
         <section>
-          <h1 className='font-bold text-8xl text-center'>Welcome</h1>
-          <p className='text-2xl text-center'>
+          <h1 className='font-bold text-[40px] md:text-8xl text-center'>
+            Welcome
+          </h1>
+          <p className='text-lg md:text-2xl text-center'>
             Always stay updated in your student portal
           </p>
         </section>
@@ -18,7 +20,7 @@ export default function Auth() {
             alt='Asset auth'
             width={478}
             height={394}
-            className='max-w-full h-auto'
+            className='w-[240px] h-[198px] md:w-[478px] md:h-[394px]'
           />
         </section>
         <section className='flex flex-col justify-center items-center gap-[30px]'>
