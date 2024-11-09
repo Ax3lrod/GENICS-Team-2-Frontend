@@ -1,15 +1,9 @@
-import NextImage from '@/components/NextImage';
+import { FcGoogle } from 'react-icons/fc';
 
 export default function logo() {
   return (
     <div className='w-fit h-fit'>
-      <NextImage
-        src='/register/logo-google.png'
-        alt='logo google'
-        width={26}
-        height={26}
-        className='max-w-full h-auto'
-      />
+      <FcGoogle className='w-[26px] h-[26px]' />
     </div>
   );
 }

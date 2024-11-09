@@ -1,64 +1,57 @@
 'use client';
+
 import * as React from 'react';
 import { Checkbox } from '@nextui-org/react';
 import { Button } from '@/components/nextui-extend-variants/Button';
 import Link from 'next/link';
 import Input from '@/components/form/Input';
 import Image from 'next/image';
-import { useForm, FormProvider } from 'react-hook-form';
-import { ApiResponse } from '@/types/api';
-import { useRouter } from 'next/navigation'
-
-const PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+import { LoginRequest } from '@/types/auth/login';
+import { serialize } from 'object-to-formdata';
+import { useLoginMutation } from './hooks/mutation';
+import LogoGoogle from '@/contents/LogoGoogle';
+import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { REG_EMAIL, REG_PASSWORD } from '@/contents/regex';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
-  interface LoginFormInputs {
-    username: string;
-    password: string;
-  }
-  
-  const methods = useForm<LoginFormInputs>();
-  const { handleSubmit, setValue, watch, formState: { errors } } = methods;
-  const [errorMessage, setErrorMessage] = React.useState('');
   const router = useRouter();
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [usernameValue, setValueUsername] = React.useState('');
+  const [passwordValue, setValuePassword] = React.useState('');
 
-  const handleLogin = async (data: LoginFormInputs) => {
-    const { username, password } = data;
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
-    try {
-      const response = await fetch(`${PUBLIC_API_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      
-      console.log('Response:', response);
-      
-      if (!response.ok) {
-        const errorDetails = await response.json();
-        console.log('Error details:', errorDetails);
-        setErrorMessage(errorDetails.message || 'Login failed');
-        return;
-      }
-      
-      const result: ApiResponse<{ token?: string }> = await response.json();
-      console.log('Login successful:', result.data);      
-    } catch (error) {
-      setErrorMessage('An error occurred during login');
-      console.error('Login error:', error);
-    }
+  const methods = useForm<LoginRequest>({
+    mode: 'onTouched',
+  });
+
+  const {
+    handleSubmit,
+    register,
+    formState: { isValid },
+    // getValues,
+  } = methods;
+
+  const { handleLogin, isPending } = useLoginMutation();
+
+  const onSubmit: SubmitHandler<LoginRequest> = (data) => {
+    serialize(
+      handleLogin({
+        username: data.username,
+        password: data.password,
+      }),
+    );
   };
-
-  const usernameValue = watch('username');
-  const passwordValue = watch('password');
-
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(handleLogin)} className='w-screen h-screen flex bg-white'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='w-screen h-screen flex bg-white'
+      >
         <section className='lg:w-[60%] w-[100%] h-full flex justify-center items-center min-w-[350px]'>
-          <button type="button" onClick={() => router.push('/')}>
+          <button type='button' onClick={() => router.push('/')}>
             <Image
               src='/images/login/loginbackbutton.png'
               alt='Back Button'
@@ -88,8 +81,17 @@ export default function Login() {
                 placeholder='Input your Username or Email'
                 variant='bordered'
                 value={usernameValue}
-                onChange={(e) => setValue('username', e.target.value)}
-                errorMessage={errors.username?.message}
+                onValueChange={setValueUsername}
+                isRequired
+                validation={{
+                  required: true,
+                  pattern: {
+                    value: REG_EMAIL,
+                    message: '',
+                  },
+                }}
+                errorMessage='Please enter a valid email/username'
+                {...register('username')}
               />
             </div>
             <div className='flex flex-col w-full gap-2'>
@@ -98,14 +100,35 @@ export default function Login() {
                 label='Password'
                 labelPlacement='outside'
                 placeholder='Input your password'
+                validation={{
+                  required: true,
+                  pattern: {
+                    value: REG_PASSWORD,
+                    message: '',
+                  },
+                }}
                 variant='bordered'
-                type='password'
                 value={passwordValue}
-                onChange={(e) => setValue('password', e.target.value)}
-                errorMessage={errors.password?.message}
+                onValueChange={setValuePassword}
+                errorMessage='Please enter your password'
+                isRequired
+                endContent={
+                  <button
+                    className='focus:outline-none'
+                    type='button'
+                    onClick={toggleVisibility}
+                  >
+                    {isVisible ? (
+                      <FaRegEye className='pointer-events-none text-2xl text-default-400' />
+                    ) : (
+                      <FaRegEyeSlash className='pointer-events-none text-2xl text-default-400' />
+                    )}
+                  </button>
+                }
+                type={isVisible ? 'text' : 'password'}
+                {...register('password')}
               />
             </div>
-            {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
             <div className='flex w-full justify-between'>
               <div className='flex items-center'>
                 <Checkbox>
@@ -118,7 +141,7 @@ export default function Login() {
                 </a>
               </div>
             </div>
-            <Button type='submit'>
+            <Button type='submit' isLoading={isPending} isDisabled={isValid}>
               <span className='text-xs lg:text-base'>Log In</span>
             </Button>
             <div className='w-full flex items-center justify-center'>
@@ -128,15 +151,15 @@ export default function Login() {
               </p>
               <hr className='w-[40%] bg-black border-black'></hr>
             </div>
-            <Button className='bg-white border-primary-500 border-2 text-primary-500 text-xs lg:text-base'>
-              <Image
-                src='/images/login/googlelogo.png'
-                alt='Google'
-                width={20}
-                height={20}
-                className='mr-2'
-              />
-              Log in With Google
+            <Button
+              size='md'
+              color='primary'
+              variant='bordered'
+              type='submit'
+              className='w-full h-[44px]'
+              startContent={<LogoGoogle />}
+            >
+              <span className='text-xs lg:text-base'>Login With Google</span>
             </Button>
             <div className='w-full flex items-center justify-center'>
               <p className='text-xs lg:text-base'>
