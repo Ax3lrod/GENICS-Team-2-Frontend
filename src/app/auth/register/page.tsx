@@ -266,7 +266,7 @@ export default function Register() {
               <Button
                 type='submit'
                 isLoading={isPending}
-                isDisabled={isValid}
+                isDisabled={!isValid}
                 size='md'
                 color='primary'
                 className='w-full h-[44px]'
