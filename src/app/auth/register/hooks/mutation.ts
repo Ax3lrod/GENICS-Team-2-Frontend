@@ -1,12 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
+import { useRouter } from 'next/navigation';
 import { DANGER_TOAST, showToast, SUCCESS_TOAST } from '@/components/Toast';
 import api from '@/lib/api';
 import { ApiError } from '@/types/api';
 import { RegisterRequest, RegisterResponse } from '@/types/auth/regist';
 
 export const useRegistMutation = () => {
+  const router = useRouter();
   const {
     mutate: handleRegist,
     isSuccess,
@@ -19,7 +21,8 @@ export const useRegistMutation = () => {
     },
 
     onSuccess: () => {
-      showToast('Success, check your email', SUCCESS_TOAST);
+      showToast('Success register user', SUCCESS_TOAST);
+      router.push('/auth');
     },
     onError: (error: AxiosError<ApiError>) => {
       const statusCode = error.response?.status;

@@ -7,27 +7,27 @@ export type PaginateData<Data> = {
 };
 
 export interface PaginatedApiResponse<DataType> {
-  code: number;
-  status: boolean;
+  success: boolean;
   message: string;
-  data: PaginateData<DataType>;
+  statusCode: number;
+  responseObject: PaginateData<DataType>;
 }
 
 export type ApiResponse<T> = {
+  success: boolean;
   message: string;
-  status: boolean;
-  code: number;
-  data: T;
+  statusCode: number;
+  responseObject: T;
 };
 
 export type ApiError = {
-  code: number;
-  status: boolean | number;
+  success: boolean;
   message: string;
+  statusCode: number;
 };
 
 export type UninterceptedApiError = {
-  code: number;
-  status: boolean;
+  success: boolean;
   message: string | Record<string, string[]>;
+  statusCode: number;
 };

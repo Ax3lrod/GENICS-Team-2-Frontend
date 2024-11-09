@@ -24,6 +24,7 @@ export default function SearchFilter({
         }}
       />
       <SelectInput
+        id='select_filter'
         placeholder='Choose type'
         classNames={{
           trigger:
@@ -39,7 +40,6 @@ export default function SearchFilter({
       </SelectInput>
       <div className='flex w-[146px] h-[64px] rounded-[10px]'>
         <Button
-          // onClick={prevStage}
           variant={undefined}
           className='flex w-[146px] h-[64px] rounded-[10px] bg-primary-200 text-white'
         >

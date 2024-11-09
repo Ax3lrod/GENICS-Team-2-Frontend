@@ -31,7 +31,6 @@ export default function Login() {
     handleSubmit,
     register,
     formState: { isValid },
-    // getValues,
   } = methods;
 
   const { handleLogin, isPending } = useLoginMutation();

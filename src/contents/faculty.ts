@@ -1,7 +1,7 @@
 export const facultyList = [
   {
-    fakultas: 'FSAD',
-    jurusan: [
+    faculty: 'FSAD',
+    major: [
       'Fisika',
       'Matematika',
       'Statistika',
@@ -11,8 +11,8 @@ export const facultyList = [
     ],
   },
   {
-    fakultas: 'FT-IRS',
-    jurusan: [
+    faculty: 'FT-IRS',
+    major: [
       'Teknik Mesin',
       'Teknik Kimia',
       'Teknik Fisika',
@@ -21,8 +21,8 @@ export const facultyList = [
     ],
   },
   {
-    fakultas: 'FT-SPK',
-    jurusan: [
+    faculty: 'FT-SPK',
+    major: [
       'Teknik Sipil',
       'Arsitektur',
       'Teknik Lingkungan',
@@ -32,8 +32,8 @@ export const facultyList = [
     ],
   },
   {
-    fakultas: 'FV',
-    jurusan: [
+    faculty: 'FV',
+    major: [
       'Teknik Infrastruktur Sipil',
       'Teknik Mesin Industri',
       'Teknik Elektro Otomasi',
@@ -43,16 +43,12 @@ export const facultyList = [
     ],
   },
   {
-    fakultas: 'FKK',
-    jurusan: [
-      'Teknologi Kedokteran',
-      'Kedokteran',
-      'Pendidikan Profesi Dokter',
-    ],
+    faculty: 'FKK',
+    major: ['Teknologi Kedokteran', 'Kedokteran', 'Pendidikan Profesi Dokter'],
   },
   {
-    fakultas: 'FTK',
-    jurusan: [
+    faculty: 'FTK',
+    major: [
       'Teknik Perkapalan',
       'Teknik Sistem Perkapalan',
       'Teknik Kelautan',
@@ -60,8 +56,8 @@ export const facultyList = [
     ],
   },
   {
-    fakultas: 'FT-EIC',
-    jurusan: [
+    faculty: 'FT-EIC',
+    major: [
       'Teknik Elektro',
       'Teknik Biomedik',
       'Teknik Komputer',
@@ -71,8 +67,8 @@ export const facultyList = [
     ],
   },
   {
-    fakultas: 'F-DKBD',
-    jurusan: [
+    faculty: 'F-DKBD',
+    major: [
       'Desain Produk Industri',
       'Desain Interior',
       'Desain Komunikasi Visual',
@@ -81,5 +77,5 @@ export const facultyList = [
       'Manajemen Teknologi',
     ],
   },
-  { fakultas: 'SIMT', jurusan: ['Manajemen Teknologi'] },
+  { faculty: 'SIMT', major: ['Manajemen Teknologi'] },
 ];
