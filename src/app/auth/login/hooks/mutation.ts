@@ -1,3 +1,5 @@
+'use client';
+
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -13,27 +15,22 @@ export const useLoginMutation = () => {
 
   const {
     mutate: handleLogin,
-    isSuccess,
     isPending,
+    isSuccess,
   } = useMutation<LoginResponse, AxiosError<ApiError>, LoginRequest>({
     mutationFn: async (data) => {
       const res = await api.post<LoginResponse>('/auth/login', data);
-      const { token } = res.data.data;
+      const { token } = res.data.responseObject;
       setToken(token);
-
-      if (!res.data.data) {
-        throw new Error('Invalid login session');
-      }
-      setToken(token);
-
       return res.data;
     },
 
-    onSuccess: () => {
-      showToast('Login success', SUCCESS_TOAST);
+    onSuccess: async () => {
+      showToast('Login Success', SUCCESS_TOAST);
       router.push('/');
     },
-    onError: (error: AxiosError<ApiError>) => {
+
+    onError: async (error: AxiosError<ApiError>) => {
       const statusCode = error.response?.status;
       let message =
         error.response?.data.message || 'Error, please try again later';

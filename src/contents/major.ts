@@ -1,85 +1,174 @@
 export const majorList = [
   {
-    fakultas: 'FSAD',
-    jurusan: [
-      'Fisika',
-      'Matematika',
-      'Statistika',
-      'Kimia',
-      'Biologi',
-      'Aktuaria',
-    ],
+    major: 'Fisika',
+    faculty: 'FSAD',
   },
   {
-    fakultas: 'FT-IRS',
-    jurusan: [
-      'Teknik Mesin',
-      'Teknik Kimia',
-      'Teknik Fisika',
-      'Teknik Sistem dan Industri',
-      'Teknik Material',
-    ],
+    major: 'Matematika',
+    faculty: 'FSAD',
   },
   {
-    fakultas: 'FT-SPK',
-    jurusan: [
-      'Teknik Sipil',
-      'Arsitektur',
-      'Teknik Lingkungan',
-      'Perencanaan Wilayah dan Kota',
-      'Teknik Geomatika',
-      'Teknik Geofisika',
-    ],
+    major: 'Statistika',
+    faculty: 'FSAD',
   },
   {
-    fakultas: 'FV',
-    jurusan: [
-      'Teknik Infrastruktur Sipil',
-      'Teknik Mesin Industri',
-      'Teknik Elektro Otomasi',
-      'Teknik Kimia Industri',
-      'Teknik Instrumentasi',
-      'Statistika Bisnis',
-    ],
+    major: 'Kimia',
+    faculty: 'FSAD',
   },
   {
-    fakultas: 'FKK',
-    jurusan: [
-      'Teknologi Kedokteran',
-      'Kedokteran',
-      'Pendidikan Profesi Dokter',
-    ],
+    major: 'Biologi',
+    faculty: 'FSAD',
   },
   {
-    fakultas: 'FTK',
-    jurusan: [
-      'Teknik Perkapalan',
-      'Teknik Sistem Perkapalan',
-      'Teknik Kelautan',
-      'Teknik Transportasi Laut',
-    ],
+    major: 'Aktuaria',
+    faculty: 'FSAD',
   },
   {
-    fakultas: 'FT-EIC',
-    jurusan: [
-      'Teknik Elektro',
-      'Teknik Biomedik',
-      'Teknik Komputer',
-      'Teknik Informatika',
-      'Sistem Informasi',
-      'Teknologi Informasi',
-    ],
+    major: 'Teknik Mesin',
+    faculty: 'FT-IRS',
   },
   {
-    fakultas: 'F-DKBD',
-    jurusan: [
-      'Desain Produk Industri',
-      'Desain Interior',
-      'Desain Komunikasi Visual',
-      'Manajemen Bisnis',
-      'Studi Pembangunan',
-      'Manajemen Teknologi',
-    ],
+    major: 'Teknik Kimia',
+    faculty: 'FT-IRS',
   },
-  { fakultas: 'SIMT', jurusan: ['Manajemen Teknologi'] },
+  {
+    major: 'Teknik Fisika',
+    faculty: 'FT-IRS',
+  },
+  {
+    major: 'Teknik Sistem dan Industri',
+    faculty: 'FT-IRS',
+  },
+  {
+    major: 'Teknik Material',
+    faculty: 'FT-IRS',
+  },
+  {
+    major: 'Teknik Sipil',
+    faculty: 'FT-SPK',
+  },
+  {
+    major: 'Arsitektur',
+    faculty: 'FT-SPK',
+  },
+  {
+    major: 'Teknik Lingkungan',
+    faculty: 'FT-SPK',
+  },
+  {
+    major: 'Perencanaan Wilayah dan Kota',
+    faculty: 'FT-SPK',
+  },
+  {
+    major: 'Teknik Geomatika',
+    faculty: 'FT-SPK',
+  },
+  {
+    major: 'Teknik Geofisika',
+    faculty: 'FT-SPK',
+  },
+  {
+    major: 'Teknik Infrastruktur Sipil',
+    faculty: 'FV',
+  },
+  {
+    major: 'Teknik Mesin Industri',
+    faculty: 'FV',
+  },
+  {
+    major: 'Teknik Elektro Otomasi',
+    faculty: 'FV',
+  },
+  {
+    major: 'Teknik Kimia Industri',
+    faculty: 'FV',
+  },
+  {
+    major: 'Teknik Instrumentasi',
+    faculty: 'FV',
+  },
+  {
+    major: 'Statistika Bisnis',
+    faculty: 'FV',
+  },
+  {
+    major: 'Teknologi Kedokteran',
+    faculty: 'FKK',
+  },
+  {
+    major: 'Kedokteran',
+    faculty: 'FKK',
+  },
+  {
+    major: 'Pendidikan Profesi Dokter',
+    faculty: 'FKK',
+  },
+  {
+    major: 'Teknik Perkapalan',
+    faculty: 'FTK',
+  },
+  {
+    major: 'Teknik Sistem Perkapalan',
+    faculty: 'FTK',
+  },
+  {
+    major: 'Teknik Kelautan',
+    faculty: 'FTK',
+  },
+  {
+    major: 'Teknik Transportasi Laut',
+    faculty: 'FTK',
+  },
+  {
+    major: 'Teknik Elektro',
+    faculty: 'FT-EIC',
+  },
+  {
+    major: 'Teknik Biomedik',
+    faculty: 'FT-EIC',
+  },
+  {
+    major: 'Teknik Komputer',
+    faculty: 'FT-EIC',
+  },
+  {
+    major: 'Teknik Informatika',
+    faculty: 'FT-EIC',
+  },
+  {
+    major: 'Sistem Informasi',
+    faculty: 'FT-EIC',
+  },
+  {
+    major: 'Teknologi Informasi',
+    faculty: 'FT-EIC',
+  },
+  {
+    major: 'Desain Produk Industri',
+    faculty: 'F-DKBD',
+  },
+  {
+    major: 'Desain Interior',
+    faculty: 'F-DKBD',
+  },
+  {
+    major: 'Desain Komunikasi Visual',
+    faculty: 'F-DKBD',
+  },
+  {
+    major: 'Manajemen Bisnis',
+    faculty: 'F-DKBD',
+  },
+  {
+    major: 'Studi Pembangunan',
+    faculty: 'F-DKBD',
+  },
+  {
+    major: 'Manajemen Teknologi',
+    faculty: 'F-DKBD',
+  },
+  {
+    major: 'Manajemen Teknologi',
+    faculty: 'SIMT',
+  },
 ];

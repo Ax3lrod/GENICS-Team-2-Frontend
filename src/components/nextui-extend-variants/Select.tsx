@@ -1,7 +1,7 @@
 'use client';
-import { extendVariants, Select } from '@nextui-org/react';
+import { extendVariants, Select as NextUISelect } from '@nextui-org/react';
 
-export const FormSelect = extendVariants(Select, {
+export const Select = extendVariants(NextUISelect, {
   variants: {
     variant: {
       bordered: {

@@ -4,13 +4,14 @@ import Input from '@/components/form/Input';
 import { SelectItem } from '@nextui-org/react';
 import NextImage from '@/components/NextImage';
 import { Button } from '@/components/nextui-extend-variants/Button';
+import { Select } from '@/components/nextui-extend-variants/Select';
 import Link from 'next/link';
 import { RegisterRequest } from '@/types/auth/regist';
 import { serialize } from 'object-to-formdata';
 import { facultyList } from '@/contents/faculty';
+import { majorList } from '@/contents/major';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import LogoGoogle from '@/contents/LogoGoogle';
-import SelectInput from '@/components/form/SelectInput';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
 import { REG_EMAIL, REG_PASSWORD } from '@/contents/regex';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
@@ -40,7 +41,7 @@ export default function Register() {
   const onSubmit: SubmitHandler<RegisterRequest> = (data) => {
     serialize(
       handleRegist({
-        username: data.username,
+        username: data.email,
         email: data.email,
         faculty: data.faculty,
         major: data.major,
@@ -51,22 +52,6 @@ export default function Register() {
 
   const password = watch('password');
   const faculty = watch('faculty');
-
-  const [selectedFaculty, setSelectedFaculty] = React.useState('');
-  const [jurusanOptions, setJurusanOptions] = React.useState(['']);
-
-  const handleFacultyChange = () => {
-    const fakultas = faculty;
-    setSelectedFaculty(fakultas);
-    const selectedFacultyData = facultyList.find(
-      (f) => f.fakultas === fakultas,
-    );
-    if (selectedFacultyData) {
-      setJurusanOptions(selectedFacultyData.jurusan);
-    } else {
-      setJurusanOptions(['']);
-    }
-  };
 
   return (
     <FormProvider {...methods}>
@@ -145,7 +130,7 @@ export default function Register() {
             <div className='flex flex-col w-full h-full gap-11'>
               <div className='flex w-full h-full'>
                 <Input
-                  id='Username/Email'
+                  id='email'
                   label='Username/Email'
                   labelPlacement='outside'
                   placeholder='Input your Username or Email'
@@ -198,7 +183,7 @@ export default function Register() {
               </div>
               <div className='flex w-full h-full'>
                 <Input
-                  id='search'
+                  id='confirm_password'
                   label='Confirm your Password'
                   labelPlacement='outside'
                   placeholder='Input your password again'
@@ -228,45 +213,47 @@ export default function Register() {
                 />
               </div>
               <div className='flex w-full h-full'>
-                <SelectInput
+                <Select
                   id='faculty'
                   label='Faculty'
                   labelPlacement='outside'
+                  isRequired
                   placeholder='Input your faculty'
                   variant='bordered'
                   {...register('faculty')}
-                  value={selectedFaculty}
-                  onChange={handleFacultyChange}
                 >
                   {facultyList.map((faculty) => (
-                    <SelectItem key={faculty.fakultas} value={faculty.fakultas}>
-                      {faculty.fakultas}
+                    <SelectItem key={faculty.faculty} value={faculty.faculty}>
+                      {faculty.faculty}
                     </SelectItem>
                   ))}
-                </SelectInput>
+                </Select>
               </div>
               <div className='flex w-full h-full'>
-                <SelectInput
+                <Select
                   id='major'
                   label='Major'
+                  isRequired
                   labelPlacement='outside'
                   placeholder='Input your major'
                   variant='bordered'
                   {...register('major')}
                 >
-                  {jurusanOptions.map((jurusan) => (
-                    <SelectItem key={jurusan} value={jurusan}>
-                      {jurusan}
-                    </SelectItem>
-                  ))}
-                </SelectInput>
+                  {majorList
+                    .filter((item) => item.faculty == faculty)
+                    .map((data) => (
+                      <SelectItem key={data.major} value={data.major}>
+                        {data.major}
+                      </SelectItem>
+                    ))}
+                </Select>
               </div>
             </div>
             <div className='flex w-full h-full'>
               <Button
                 type='submit'
                 isLoading={isPending}
-                isDisabled={isValid}
+                isDisabled={!isValid}
                 size='md'
                 color='primary'
                 className='w-full h-[44px]'

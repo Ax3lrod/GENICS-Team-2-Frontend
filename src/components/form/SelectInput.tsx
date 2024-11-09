@@ -1,14 +1,8 @@
 'use client';
 import * as React from 'react';
-import {
-  // Controller,
-  FieldError,
-  // get,
-  RegisterOptions,
-  // useFormContext,
-} from 'react-hook-form';
+import { FieldError, RegisterOptions, useFormContext } from 'react-hook-form';
 
-import { FormSelect } from '@/components/nextui-extend-variants/Select';
+import { Select } from '@/components/nextui-extend-variants/Select';
 import clsxm from '@/lib/clsxm';
 
 type classNames = {
@@ -24,8 +18,9 @@ type classNames = {
 };
 
 type SelectProps = {
-  id?: string;
+  id: string;
   label?: string;
+  selectedKeys?: string;
   color?:
     | 'default'
     | 'primary'
@@ -44,7 +39,7 @@ type SelectProps = {
   validation?: RegisterOptions;
   className?: string;
   option?: string;
-  onChangeFn?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: React.ChangeEvent<HTMLSelectElement>;
   isDisabled?: boolean;
   isRequired?: boolean;
   description?: React.ReactNode;
@@ -54,69 +49,48 @@ type SelectProps = {
 } & React.ComponentPropsWithoutRef<'select'>;
 
 export default function SelectInput({
-  // id,
+  id,
   label,
   variant,
   placeholder,
   labelPlacement,
   size,
-  // validation,
+  validation,
   children,
   className,
   option,
-  // onChangeFn,
+  onChange,
   isDisabled,
   isRequired,
   description,
-  // errorMessage,
   radius,
   color,
   classNames,
+  selectedKeys,
 }: SelectProps) {
-  // const {
-  //   control,
-  //   formState: { errors },
-  // } = useFormContext();
+  const formContext = useFormContext();
 
-  // const error = get(errors, id);
+  const register = formContext ? formContext.register : () => {};
   return (
-    // <Controller
-    //   control={control}
-    //   name={id}
-    //   rules={validation}
-    //   render={({ field }) => (
-    <FormSelect
+    <Select
+      {...register(id, validation)}
       label={label}
       variant={variant}
       placeholder={placeholder}
       labelPlacement={labelPlacement}
-      className={clsxm(className, {
-        /*error && 'rounded-xl bg-red-200'*/
-      })}
-      // onChange={(e) => {
-      //   field.onChange(e);
-      //   if (onChangeFn) {
-      //     onChangeFn(e);
-      //   }
-      // }}
-      // errorMessage={
-      //   errorMessage && typeof errorMessage === 'function'
-      //     ? errorMessage(error)
-      //     : errorMessage
-      // }
+      className={clsxm(className)}
+      onChange={onChange}
       isDisabled={isDisabled}
       {...(option ? { value: option } : {})}
-      //value={field.value}
       isRequired={isRequired}
       description={description}
       radius={radius}
       size={size}
       color={color}
       classNames={classNames}
+      selectedKeys={selectedKeys}
     >
       {children}
-    </FormSelect>
-    // )}
-    // />
+    </Select>
   );
 }

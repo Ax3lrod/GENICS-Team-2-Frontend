@@ -31,7 +31,6 @@ export default function Login() {
     handleSubmit,
     register,
     formState: { isValid },
-    // getValues,
   } = methods;
 
   const { handleLogin, isPending } = useLoginMutation();
@@ -141,7 +140,7 @@ export default function Login() {
                 </a>
               </div>
             </div>
-            <Button type='submit' isLoading={isPending} isDisabled={isValid}>
+            <Button type='submit' isLoading={isPending} isDisabled={!isValid}>
               <span className='text-xs lg:text-base'>Log In</span>
             </Button>
             <div className='w-full flex items-center justify-center'>
