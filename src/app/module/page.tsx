@@ -17,28 +17,24 @@ export default function ModuleList() {
 
   // DUMMY DATA, please replace with actual data when integrating with API
   const moduleList: ModuleCardProps[] = Array.from({ length: 15 }, (_, i) => ({
+    detailUrl: '/module/' + i,
     moduleData: {
-      id: `module-${i + 1}`,
-      title:
-        i % 2 == 0
-          ? 'Object oriented programming'
-          : 'Fundamentals of database systems',
+      id: '1',
+      title: 'Introduction to Web Development',
       description:
-        'Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio  mattis.',
-      updatedAt: '01 Nov 2024',
-      createdAt: '01 Nov 2024',
-      upvotes: Math.round(Math.random() * 100),
-      downvotes: Math.round(Math.random() * 100),
+        'Start your journey in web development by exploring the basics of HTML, CSS, and JavaScript. ',
+      faculty: 'FTEIC',
+      major: 'Sistem Informasi',
+      course: 'Web Development',
+      filePath: 'www.google.com',
+      upVote: 10,
+      downVote: 12,
+      createdAt: '11-12-2024',
+      updatedAt: '11-12-2024',
       user: {
-        username: `User ${i + 1}`,
+        username: 'John Doe',
       },
     },
-    detailUrl: `/module/${i + 1}`,
-    illustrationUrl:
-      i % 2 == 0
-        ? '/images/module/computer.png'
-        : '/images/module/statistic.png',
-    isActive: i === 0,
   }));
   return (
     <Layout>
@@ -115,9 +111,7 @@ export default function ModuleList() {
                 className='!w-full'
                 key={module.moduleData.id}
                 detailUrl={module.detailUrl}
-                illustrationUrl={module.illustrationUrl}
                 moduleData={module.moduleData}
-                isActive={module.isActive}
               />
             ))
           ) : (
