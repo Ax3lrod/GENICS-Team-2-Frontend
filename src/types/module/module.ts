@@ -36,6 +36,25 @@ export type ModuleDetail = {
   };
 };
 
+export type ModuleComment = {
+  id: string;
+  feedback: string;
+  rating: number;
+  userId: string;
+  lecturerId: string;
+  moduleId: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export interface ModuleDetailProps extends ModuleDetail {
+  title: string;
+  description: string;
+  user: {
+    username: string;
+  };
+}
+
 export type ModuleRequest = {
   id: string;
   title: string;
