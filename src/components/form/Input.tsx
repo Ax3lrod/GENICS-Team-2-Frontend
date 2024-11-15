@@ -26,7 +26,13 @@ type InputProps = {
   radius?: 'none' | 'sm' | 'md' | 'lg' | 'full';
   size?: 'sm' | 'md' | 'lg';
   classNames?: classNames;
-  variant?: 'bordered' | 'flat' | 'underlined' | 'faded' | undefined;
+  variant?:
+    | 'bordered'
+    | 'flat'
+    | 'underlined'
+    | 'faded'
+    | 'textarea'
+    | undefined;
   label?: string;
   placeholder?: string;
   validation?: RegisterOptions;

@@ -8,6 +8,12 @@ export const FormInput = extendVariants(Input, {
         inputWrapper:
           'data-[hover=true]:border-default-400 group-data-[focus=true]:border-default-400',
       },
+      textarea: {
+        inputWrapper:
+          'rounded-[6px] border-[3px] border-[var(--Foundation-Primary-primary-500,#007A89)] ' +
+          'bg-[var(--Foundation-Primary-primary-50,#E6F2F3)] ' +
+          'shadow-[4px_4px_4px_0px_rgba(179,231,237,0.15)]',
+      },
     },
     size: {
       sm: {
