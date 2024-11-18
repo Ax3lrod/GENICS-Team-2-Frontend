@@ -9,6 +9,6 @@ export const menuItems = [
   },
   {
     label: 'Lecturer Feedback',
-    href: '/lecture',
+    href: '/lecturer',
   },
 ];
