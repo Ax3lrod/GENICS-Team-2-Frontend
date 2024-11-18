@@ -49,7 +49,7 @@ function NavbarLayout() {
           <Image
             height={78}
             width={136}
-            src='/images/logo.png'
+            src='/logo-shareits.png'
             alt='logo'
             className='h-full w-fit object-contain'
           />
