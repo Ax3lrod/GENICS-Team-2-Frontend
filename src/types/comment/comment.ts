@@ -4,8 +4,8 @@ export type CommentRequest = {
   id: string;
   feedback: string;
   rating: number;
-  userId: string;
-  lecturerId: string;
+  userId?: string;
+  lecturerId?: string;
   moduleId: string;
   createdAt: string;
   updatedAt: string;
