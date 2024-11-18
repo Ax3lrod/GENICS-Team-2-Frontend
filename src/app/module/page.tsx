@@ -10,8 +10,10 @@ import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FiUpload } from 'react-icons/fi';
 import { LuListFilter } from 'react-icons/lu';
+import withAuth from '@/components/hoc/withAuth';
 
-export default function ModuleList() {
+export default withAuth(ModuleList, 'public');
+function ModuleList() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [search, setSearch] = useState('');
 

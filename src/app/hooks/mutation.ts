@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { AllModuleResponse } from '@/types/module/module';
+import { ApiResponse } from '@/types/api';
 
 import api from '@/lib/api';
 
@@ -10,7 +11,7 @@ export const useLandingPageQuery = () => {
     data: queryData,
     isPending,
     isError,
-  } = useQuery<AllModuleResponse>({
+  } = useQuery<ApiResponse<AllModuleResponse>>({
     queryKey: ['Get All Module Response Data'],
     queryFn: async () => {
       const response = await api.get('/modules');

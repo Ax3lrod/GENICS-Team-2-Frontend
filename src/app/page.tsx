@@ -8,8 +8,11 @@ import Link from 'next/link';
 import { IoSearch } from 'react-icons/io5';
 import { useLandingPageQuery } from './hooks/mutation';
 import ModuleCard from '@/components/ModuleCard';
+import withAuth from '@/components/hoc/withAuth';
 
-export default function Home() {
+export default withAuth(Home, 'public');
+
+function Home() {
   const ModuleDetail = {
     id: '1',
     title: 'Introduction to Web Development',
@@ -173,7 +176,7 @@ export default function Home() {
             <div className='flex flex-wrap justify-center items-center gap-6'>
               {isPending && 'loading...'}
               {!isError &&
-                queryData?.map((data) => (
+                queryData?.responseObject.map((data) => (
                   <ModuleCard
                     key={data.id}
                     moduleData={data}

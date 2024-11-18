@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import Navbar from '@/layouts/Navbar';
 import NextImage from '@/components/NextImage';
@@ -11,26 +12,28 @@ import { ModuleDetailProps, ModuleComment } from '@/types/module/module';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { CommentRequest } from '@/types/comment/comment';
 import { serialize } from 'object-to-formdata';
-import { useCommentMutation } from './hook/moduleCommentMutation';
+import { useCommentMutation } from './hooks/mutation';
 import { useQuery } from '@tanstack/react-query';
 import { ApiResponse } from '@/types/api';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import api from '@/lib/api';
 import { DANGER_TOAST, showToast } from '@/components/Toast';
+import withAuth from '@/components/hoc/withAuth';
+import useAuthStore from '@/stores/useAuthStore';
 
-export default function ModuleDetailPage() {
+export default withAuth(ModuleDetailPage, 'private');
+function ModuleDetailPage() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
-  const router = useRouter();
-  const { moduleId } = router.query;
+  const moduleId = usePathname().split('/').pop();
 
   const { data: moduleData } = useQuery({
     queryKey: ['module', moduleId],
     queryFn: async () => {
       try {
         const { data } = await api.get<ApiResponse<ModuleDetailProps>>(
-          `/api/modules/${moduleId}`,
+          `/modules/${moduleId}`,
         );
 
         return data.responseObject;
@@ -46,7 +49,7 @@ export default function ModuleDetailPage() {
     queryFn: async () => {
       try {
         const { data } = await api.get<ApiResponse<ModuleComment[]>>(
-          `/api/comments/module/${moduleId}`,
+          `/comments/module/${moduleId}`,
         );
 
         return data.responseObject;
@@ -101,6 +104,8 @@ export default function ModuleDetailPage() {
     return `comment_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
   };
 
+  const { user } = useAuthStore();
+
   const onSubmit: SubmitHandler<CommentRequest> = (data) => {
     const uniqueCommentId = generateCommentId();
 
@@ -109,7 +114,7 @@ export default function ModuleDetailPage() {
         id: uniqueCommentId,
         feedback: data.feedback,
         rating: rating,
-        userId: 'user123',
+        userId: user?.user.id,
         lecturerId: 'unasigned',
         moduleId: moduleId as string,
         createdAt: new Date().toISOString(),
@@ -118,7 +123,7 @@ export default function ModuleDetailPage() {
     );
   };
 
-  return moduleData? (
+  return moduleData ? (
     <main className='w-screen min-h-screen bg-[#f7f7f7]'>
       <Navbar />
 
@@ -161,7 +166,7 @@ export default function ModuleDetailPage() {
         />
         <section className='w-[60%] flex justify-center text-center flex-col gap-y-4 z-10'>
           <h1 className='font-bold text-4xl'>{moduleData.title}</h1>
-          <h5 className='text-xl'>by {moduleData.user.username}</h5>
+          <h5 className='text-xl'>by {moduleData.user?.username}</h5>
         </section>
         <section className='w-[70%] h-fit flex justify-center text-center z-10'>
           <p className='text-xl'>{moduleData.description}</p>

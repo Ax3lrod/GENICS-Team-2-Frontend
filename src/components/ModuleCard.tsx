@@ -62,7 +62,7 @@ export default function ModuleCard({
       </div>
 
       <p className='line-clamp-4'>{moduleData.description}</p>
-      <p className='text-primary'>By: {moduleData.user.username}</p>
+      <p className='text-primary'>By: {moduleData.user?.username}</p>
 
       <div className='flex justify-between gap-12 mt-auto'>
         <div className='flex gap-9'>

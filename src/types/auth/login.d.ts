@@ -12,8 +12,22 @@ export type LoginResponse = ApiResponse<{
     email: string;
     faculty: string;
     major: string;
-    uploadedModules: [];
-    votes: [];
+    uploadedModules: [
+      {
+        id: string;
+        title: string;
+      },
+    ];
+    votes: [
+      {
+        id: string;
+        voteType: string;
+        module: {
+          id: string;
+          title: string;
+        };
+      },
+    ];
   };
   token: string;
 }>;

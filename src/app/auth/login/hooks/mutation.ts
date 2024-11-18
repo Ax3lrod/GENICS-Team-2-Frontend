@@ -8,10 +8,14 @@ import { DANGER_TOAST, showToast, SUCCESS_TOAST } from '@/components/Toast';
 import api from '@/lib/api';
 import { setToken } from '@/lib/cookies';
 import { ApiError } from '@/types/api';
+import useAuthStore from '@/stores/useAuthStore';
+
 import { LoginRequest, LoginResponse } from '@/types/auth/login';
 
 export const useLoginMutation = () => {
   const router = useRouter();
+
+  const { login } = useAuthStore();
 
   const {
     mutate: handleLogin,
@@ -22,6 +26,12 @@ export const useLoginMutation = () => {
       const res = await api.post<LoginResponse>('/auth/login', data);
       const { token } = res.data.responseObject;
       setToken(token);
+
+      login({
+        ...res.data.responseObject,
+        token: res.data.responseObject.token,
+      });
+
       return res.data;
     },
 
