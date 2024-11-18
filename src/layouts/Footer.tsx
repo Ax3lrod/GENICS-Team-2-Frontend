@@ -8,7 +8,7 @@ export default function Footer() {
     <div className='bg-primary px-10 md:px-12 lg:px-16 py-11 text-white flex flex-col md:flex-row md:justify-between items-center gap-10 md:gap-20 text-sm md:text-base'>
       <div className='flex flex-col gap-4 md:gap-6 md:w-1/2 lg:w-1/3'>
         <Image
-          src='/images/logo-white.svg'
+          src='/logo-white.svg'
           width={100}
           height={100}
           alt='logo'
