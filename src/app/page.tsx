@@ -19,7 +19,7 @@ function Home() {
     description:
       'Start your journey in web development by exploring the basics of HTML, CSS, and JavaScript. ',
     faculty: 'FTEIC',
-    major: 'Sistem Informasi',
+    department: 'Sistem Informasi',
     course: 'Web Development',
     filePath: 'www.google.com',
     upVote: 10,
@@ -62,7 +62,7 @@ function Home() {
                   size='sm'
                   color='primary'
                   variant='bordered'
-                  href='/lecture'
+                  href='/lecturer'
                 >
                   Search Lecturer
                 </Button>
@@ -217,7 +217,7 @@ function Home() {
                 as={Link}
                 size='sm'
                 color='primary'
-                href='www.google.com'
+                href='/module'
                 className='mt-24'
                 fullWidth
               >

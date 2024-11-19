@@ -111,7 +111,7 @@ export default function FilterList({
           clearButton: ['text-xl md:text-3xl text-gray-400'],
         }}
       />
-      <div className='flex gap-6 items-center max-md:justify-end'>
+      <div className='flex gap-6 items-center max-md:justify-center'>
         <Button
           size='lg'
           className='!h-14 md:!h-16 bg-primary-400'
