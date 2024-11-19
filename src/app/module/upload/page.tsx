@@ -21,7 +21,7 @@ export default function UploadModulePage() {
       title: '',
       description: '',
       faculty: '',
-      major: '',
+      department: '',
       course: '',
       file: '',
     },
@@ -52,7 +52,7 @@ export default function UploadModulePage() {
       showToast('Faculty is required', DANGER_TOAST);
       return;
     }
-    if (!data.major) {
+    if (!data.department) {
       showToast('Major is required', DANGER_TOAST);
       return;
     }
@@ -61,7 +61,7 @@ export default function UploadModulePage() {
       title: data.title,
       description: data.description,
       faculty: data.faculty,
-      major: data.major,
+      department: data.department,
       course: data.course,
       file: data.file,
     };
@@ -120,13 +120,13 @@ export default function UploadModulePage() {
               <p className='text-red-500'>{errors.faculty?.message}</p>
             )}
             <Select
-              id='major'
-              label='Major'
+              id='department'
+              label='Department'
               labelPlacement='outside'
               isRequired
-              placeholder='Select your major'
+              placeholder='Select your department'
               variant='blue'
-              onChange={(e) => setValue('major', e.target.value)}
+              onChange={(e) => setValue('department', e.target.value)}
             >
               {majorList
                 .filter((item) => item.faculty === faculty)
@@ -136,8 +136,8 @@ export default function UploadModulePage() {
                   </SelectItem>
                 ))}
             </Select>
-            {errors.major && (
-              <p className='text-red-500'>{errors.major?.message}</p>
+            {errors.department && (
+              <p className='text-red-500'>{errors.department?.message}</p>
             )}
             <Input
               id='course'

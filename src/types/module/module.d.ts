@@ -75,7 +75,7 @@ export type AddModuleRequest = {
   title: string;
   description: string;
   faculty: string;
-  major: string;
+  department: string;
   course: string;
   file: string;
 };
@@ -94,7 +94,7 @@ export type AddModuleResponse = ApiResponse<{
   title: string;
   description: string;
   faculty: string;
-  major: string;
+  department: string;
   course: string;
   filePath: string;
   upVote: number;
