@@ -14,6 +14,14 @@ export const FormInput = extendVariants(Input, {
           'bg-[var(--Foundation-Primary-primary-50,#E6F2F3)] ' +
           'shadow-[4px_4px_4px_0px_rgba(179,231,237,0.15)]',
       },
+      blue: {
+        inputWrapper:
+          'rounded-[10px] border-[3px] border-[var(--Foundation-Primary-primary-500,#007A89)] ' +
+          'bg-white' +
+          'shadow-[4px_4px_4px_0px_rgba(179,231,237,0.15)]',
+        input: 'text-white focus:bg-[#E6F2F3] focus:text-white',
+        placeholder: 'text-black',
+      },
     },
     size: {
       sm: {

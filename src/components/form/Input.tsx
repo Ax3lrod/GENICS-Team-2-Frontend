@@ -32,6 +32,7 @@ type InputProps = {
     | 'underlined'
     | 'faded'
     | 'textarea'
+    | 'blue'
     | undefined;
   label?: string;
   placeholder?: string;

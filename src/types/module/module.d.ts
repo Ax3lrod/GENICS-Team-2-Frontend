@@ -70,3 +70,39 @@ export type ModuleResponse = ApiResponse<{
   upvotes: number;
   downvotes: number;
 }>;
+
+export type AddModuleRequest = {
+  title: string;
+  description: string;
+  faculty: string;
+  major: string;
+  course: string;
+  file: string;
+};
+
+export type ModuleVote = {
+  id: string;
+  voteType: 'UPVOTE' | 'DOWNVOTE';
+  user: {
+    id: string;
+    username: string;
+  };
+};
+
+export type AddModuleResponse = ApiResponse<{
+  id: string;
+  title: string;
+  description: string;
+  faculty: string;
+  major: string;
+  course: string;
+  filePath: string;
+  upVote: number;
+  downVote: number;
+  createdAt: string;
+  updatedAt: string;
+  user: {
+    username: string;
+  };
+  votes: ModuleVote[];
+}>;

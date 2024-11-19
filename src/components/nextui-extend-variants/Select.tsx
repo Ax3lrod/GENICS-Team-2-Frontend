@@ -8,6 +8,15 @@ export const Select = extendVariants(NextUISelect, {
         trigger:
           'data-[hover=true]:border-default-400 data-[focus=true]:border-default-400 data-[open=true]:border-default-400',
       },
+      blue: {
+        trigger:
+          'data-[hover=true]:border-primary-500 data-[focus=true]:border-primary-500 data-[open=true]:border-primary-500' +
+          'rounded-[10px] border-[3px] border-[var(--Foundation-Primary-primary-500,#007A89)] ' +
+          'bg-white' +
+          'shadow-[4px_4px_4px_0px_rgba(179,231,237,0.15)]',
+        options: 'bg-white text-white hover:bg-[#007A89] hover:text-white',
+        option: 'bg-white text-white hover:bg-[#007A89] hover:text-white',
+      },
     },
     size: {
       sm: {
