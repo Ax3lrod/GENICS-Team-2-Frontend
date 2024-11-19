@@ -6,7 +6,7 @@ export type AllModuleResponse = [
     title: string;
     description: string;
     faculty: string;
-    major: string;
+    department: string;
     course: string;
     filePath: string;
     upVote: number;
@@ -14,7 +14,7 @@ export type AllModuleResponse = [
     createdAt: string;
     updatedAt: string;
     user: {
-      username: string;
+      username?: string;
     };
   },
 ];
@@ -24,7 +24,7 @@ export type ModuleDetail = {
   title: string;
   description: string;
   faculty: string;
-  major: string;
+  department: string;
   course: string;
   filePath: string;
   upVote: number;
@@ -32,7 +32,7 @@ export type ModuleDetail = {
   createdAt: string;
   updatedAt: string;
   user: {
-    username: string;
+    username?: string;
   };
 };
 
@@ -63,10 +63,5 @@ export type ModuleRequest = {
   downvotes: number;
 };
 
-export type ModuleResponse = ApiResponse<{
-  id: string;
-  title: string;
-  description: string;
-  upvotes: number;
-  downvotes: number;
-}>;
+export type ModuleResponse = ApiResponse<ModuleDetail>;
+export type ModuleListResponse = ApiResponse<ModuleDetail[]>;

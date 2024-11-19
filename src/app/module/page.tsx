@@ -1,83 +1,54 @@
 'use client';
 
-import ModuleCard, { ModuleCardProps } from '@/components/ModuleCard';
+import ModuleCard from '@/components/ModuleCard';
 import { Button } from '@/components/nextui-extend-variants/Button';
 import Layout from '@/layouts/Layout';
-import { Input } from '@nextui-org/input';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
+import { useEffect, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
-import { LuListFilter } from 'react-icons/lu';
 import withAuth from '@/components/hoc/withAuth';
+import { useModulesQuery } from './hooks/query';
+import { useRouter } from 'next/navigation';
+import FilterList from '@/components/form/FilterList';
 
 export default withAuth(ModuleList, 'public');
 function ModuleList() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [search, setSearch] = useState('');
+  const [filterData, setFilterData] = useState({
+    search: '',
+    sort: '',
+  });
 
-  // DUMMY DATA, please replace with actual data when integrating with API
-  const moduleList: ModuleCardProps[] = Array.from({ length: 15 }, (_, i) => ({
-    detailUrl: '/module/' + i,
-    moduleData: {
-      id: '1',
-      title: 'Introduction to Web Development',
-      description:
-        'Start your journey in web development by exploring the basics of HTML, CSS, and JavaScript. ',
-      faculty: 'FTEIC',
-      major: 'Sistem Informasi',
-      course: 'Web Development',
-      filePath: 'www.google.com',
-      upVote: 10,
-      downVote: 12,
-      createdAt: '11-12-2024',
-      updatedAt: '11-12-2024',
-      user: {
-        username: 'John Doe',
-      },
-    },
-  }));
+  const router = useRouter();
+
+  const {
+    data: totalData,
+    filteredData: moduleList,
+    isPending: isLoadingList,
+    isRefetching: isRefetchingList,
+    refetch: fetchModuleList,
+    onLoadMore,
+  } = useModulesQuery(filterData);
+
+  useEffect(() => {
+    fetchModuleList();
+  }, [filterData.search, filterData.sort, fetchModuleList]);
+
+  useEffect(() => {
+    if (totalData && totalData.length > 6) {
+      onLoadMore();
+    }
+  }, [totalData, onLoadMore]);
   return (
     <Layout>
-      <div className='min-h-svh overflow-x-hidden px-6 py-10 md:py-16 lg:py-24 flex flex-col gap-20'>
-        <div className='flex flex-col md:flex-row md:items-center gap-6 w-full max-w-4xl mx-auto'>
-          <Input
-            isClearable
-            variant='flat'
-            aria-label='Search modules'
-            placeholder='Search modules...'
-            onClear={() => setSearch('')}
-            onInput={(e) => setSearch(e.currentTarget.value)}
-            startContent={
-              <BiSearch className='h-6 md:h-8 w-6 md:w-8 text-gray-400' />
-            }
-            classNames={{
-              inputWrapper: ['!bg-primary-50 px-4 md:px-8', 'h-auto'],
-              innerWrapper: ['gap-4 md:gap-8'],
-              input: ['py-4 text-lg md:text-2xl !text-gray-500'],
-              clearButton: ['text-xl md:text-3xl text-gray-400'],
-            }}
+      <div className='min-h-svh overflow-x-hidden px-6 py-10 md:py-16 lg:py-24 flex flex-col gap-12 md:gap-20'>
+        <div className='relative z-10'>
+          <FilterList
+            searchPlaceholder='Search module...'
+            actionButtonLabel='Upload'
+            actionButtonIcon={<FiUpload className='h-4 md:h-6 w-4 md:w-6' />}
+            onChangeFilter={setFilterData}
+            onActionButtonClick={() => router.push('/module/upload-module')}
           />
-          <div className='flex gap-6 items-center max-md:justify-end'>
-            <Button
-              as={Link}
-              href='/module/upload-module'
-              size='lg'
-              className='!h-14 md:!h-16 bg-primary-400'
-            >
-              <div className='flex items-center gap-2 text-base md:text-xl lg:text-2xl'>
-                <FiUpload className='h-4 md:h-6 w-4 md:w-6' />
-                Upload
-              </div>
-            </Button>
-            <Button
-              size='lg'
-              className='!h-14 md:!h-16 bg-primary-400 !min-w-fit'
-            >
-              <LuListFilter className='h-4 md:h-6 w-4 md:w-6' />
-            </Button>
-          </div>
         </div>
 
         <div className='relative'>
@@ -86,40 +57,58 @@ function ModuleList() {
             alt='cloud'
             width={100}
             height={100}
-            className='hidden md:block object-fit w-[12%] min-w-32 max-w-48 absolute bottom-0 left-0 transform -translate-x-1/3'
+            className='object-fit w-[12%] min-w-20 md:min-w-32 max-w-48 absolute -top-full md:top-auto md:bottom-0 left-0 transform -translate-x-1/3'
           />
           <Image
             src='/images/module/cloud.svg'
             alt='cloud'
             width={100}
             height={100}
-            className='hidden md:block object-fit w-[12%] min-w-32 max-w-48 absolute bottom-1/2 right-0 transform translate-x-1/3'
+            className='object-fit w-[12%] min-w-20 md:min-w-32 max-w-48 absolute bottom-full md:bottom-1/2 right-0 transform translate-x-1/3'
           />
           <div className='relative z-10 flex flex-col items-center gap-4 md:w-11/12 max-w-5xl mx-auto'>
             <h3 className='text-3xl md:text-4xl lg:text-6xl font-bold text-gray-800'>
               Module List
             </h3>
             <p className='text-base md:text-xl lg:text-2xl text-center font-medium text-gray-800 tracking-widest'>
-              Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              vulputate libero et velit interdum, ac aliquet odio mattis.
+              Your learning adventure starts here! <br />
+              Explore all of these learning modules.
             </p>
           </div>
         </div>
 
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 md:w-fit gap-6 mx-auto'>
-          {moduleList?.length ? (
-            moduleList.map((module) => (
-              <ModuleCard
-                className='!w-full'
-                key={module.moduleData.id}
-                detailUrl={module.detailUrl}
-                moduleData={module.moduleData}
-              />
-            ))
-          ) : (
-            <p>No Module yet</p>
-          )}
-        </div>
+        {isLoadingList || isRefetchingList ? (
+          <p className='text-2xl text-center text-primary-200 font-bold py-20'>
+            Loading...
+          </p>
+        ) : moduleList?.length ? (
+          <div className='w-full flex flex-col items-center gap-10 md:gap-20'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 max-w-7xl gap-6 mx-auto justify-center'>
+              {moduleList.map((module) => (
+                <ModuleCard
+                  className='!w-full'
+                  key={module.id}
+                  detailUrl={`/module/${module.id}`}
+                  moduleData={module}
+                />
+              ))}
+            </div>
+            {totalData && moduleList.length < totalData?.length && (
+              <Button
+                size='sm'
+                color='primary'
+                className='max-md:w-full'
+                onClick={onLoadMore}
+              >
+                See More
+              </Button>
+            )}
+          </div>
+        ) : (
+          <p className='text-2xl text-center text-primary-200 font-bold py-20'>
+            No module found
+          </p>
+        )}
       </div>
     </Layout>
   );

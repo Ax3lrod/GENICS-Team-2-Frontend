@@ -56,7 +56,7 @@ export default function LecturerList() {
             />
             <div className='relative z-10 flex flex-col items-center gap-4 md:w-11/12 max-w-5xl mx-auto'>
               <h3 className='text-3xl md:text-4xl lg:text-6xl font-bold text-gray-800'>
-                Lecture List
+                Lecturer List
               </h3>
               <p className='text-base md:text-xl lg:text-2xl text-center font-medium text-gray-800 tracking-widest'>
                 Get to know your lecturers and their teaching methods only at
@@ -68,7 +68,7 @@ export default function LecturerList() {
           <div className='flex items-center max-w-7xl mx-auto md:gap-10'>
             <div className='flex flex-col items-center gap-4 md:w-3/5'>
               <h3 className='text-3xl md:text-4xl lg:text-6xl font-bold text-gray-800'>
-                Lecture List
+                Lecturer List
               </h3>
               <p className='text-base md:text-xl lg:text-2xl text-center font-medium text-gray-800 tracking-widest'>
                 Get to know your lecturers and their teaching methods only at
