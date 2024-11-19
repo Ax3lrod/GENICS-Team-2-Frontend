@@ -6,7 +6,12 @@ import { ModuleDetail } from '@/types/module/module';
 import { IoDocumentText } from 'react-icons/io5';
 import { Button } from '@/components/nextui-extend-variants/Button';
 import clsxm from '@/lib/clsxm';
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+import useAuthStore from '@/stores/useAuthStore';
+import { useModulesMutation } from '@/app/module/hooks/mutation';
+import { DANGER_TOAST, showToast } from './Toast';
+import { useRouter } from 'next/navigation';
+import { Spinner } from '@nextui-org/react';
 
 export type ModuleCardProps = {
   detailUrl: string;
@@ -18,34 +23,56 @@ export default function ModuleCard({
   detailUrl,
   ...attrs
 }: ModuleCardProps & React.HTMLAttributes<HTMLDivElement>) {
-  const [isLike, setIsLike] = React.useState(false);
-  const [isDislike, setIsDislike] = React.useState(false);
-  const [upVote, setUpVote] = React.useState(moduleData.upVote);
-  const [downVote, setDownVote] = React.useState(moduleData.downVote);
+  const [upVote, setUpVote] = useState(moduleData.upVote);
+  const [downVote, setDownVote] = useState(moduleData.downVote);
 
-  const handleLike = () => {
-    if (isLike == false && isDislike == false) {
-      setUpVote(upVote + 1);
-      setIsLike(true);
-    } else if (isDislike == true) {
-      setDownVote(downVote - 1);
-      setUpVote(upVote + 1);
-      setIsLike(true);
-      setIsDislike(false);
+  const router = useRouter();
+  const isAuthed = useAuthStore.useIsAuthed();
+
+  const {
+    upvoteData,
+    handleUpvote,
+    isPendingUpvote,
+    isErrorUpvote,
+    downvoteData,
+    handleDownvote,
+    isPendingDownvote,
+    isErrorDownvote,
+  } = useModulesMutation();
+
+  const handleVotes = (type: 'upVote' | 'downVote') => {
+    if (!isAuthed) {
+      showToast('Please login first', DANGER_TOAST);
+      router.push('/auth/login');
+      return;
+    }
+
+    if (type === 'upVote') {
+      handleUpvote(moduleData.id);
+    } else {
+      handleDownvote(moduleData.id);
     }
   };
 
-  const handleDislike = () => {
-    if (isLike == false && isDislike == false) {
-      setDownVote(downVote + 1);
-      setIsDislike(true);
-    } else if (isLike == true) {
-      setDownVote(downVote + 1);
-      setUpVote(upVote - 1);
-      setIsLike(false);
-      setIsDislike(true);
+  useEffect(() => {
+    if (upvoteData) {
+      setUpVote(upvoteData?.upVote);
+      setDownVote(upvoteData?.downVote);
     }
-  };
+  }, [upvoteData]);
+
+  useEffect(() => {
+    if (downvoteData) {
+      setUpVote(downvoteData?.upVote);
+      setDownVote(downvoteData?.downVote);
+    }
+  }, [downvoteData]);
+
+  useEffect(() => {
+    if (isErrorUpvote || isErrorDownvote) {
+      showToast('Failed to vote module! Try again later', DANGER_TOAST);
+    }
+  }, [isErrorUpvote, isErrorDownvote]);
 
   return (
     <div
@@ -66,10 +93,20 @@ export default function ModuleCard({
 
       <div className='flex justify-between gap-12 mt-auto'>
         <div className='flex gap-9'>
-          <div className='flex items-center gap-1 text-primary'>
+          <div className='relative flex items-center gap-1 text-primary'>
+            <Spinner
+              className={clsxm(
+                'absolute inset-0',
+                isPendingUpvote ? 'visible' : 'invisible',
+              )}
+              size='sm'
+            />
             <Image
-              onClick={() => handleLike()}
-              className='cursor-pointer hover:scale-110 active:scale-125 transition-transform'
+              onClick={() => handleVotes('upVote')}
+              className={clsxm(
+                'hover:scale-110 active:scale-125 transition-transform',
+                isPendingUpvote ? 'cursor-not-allowed' : 'cursor-pointer',
+              )}
               width={20}
               height={20}
               src='/images/module/like.png'
@@ -77,10 +114,20 @@ export default function ModuleCard({
             />
             <p>{upVote}</p>
           </div>
-          <div className='flex items-center gap-1 text-gray-500'>
+          <div className='relative flex items-center gap-1 text-gray-500'>
+            <Spinner
+              className={clsxm(
+                'absolute inset-0',
+                isPendingDownvote ? 'visible' : 'invisible',
+              )}
+              size='sm'
+            />
             <Image
-              onClick={() => handleDislike()}
-              className='cursor-pointer hover:scale-110 active:scale-125 transition-transform'
+              onClick={() => handleVotes('downVote')}
+              className={clsxm(
+                'hover:scale-110 active:scale-125 transition-transform',
+                isPendingDownvote ? 'cursor-not-allowed' : 'cursor-pointer',
+              )}
               width={20}
               height={20}
               src='/images/module/dislike.svg'
