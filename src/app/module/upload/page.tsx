@@ -3,6 +3,7 @@
 import Input from '@/components/form/Input';
 import { SelectItem } from '@nextui-org/react';
 import { Select } from '@/components/nextui-extend-variants/Select';
+import UploadFile from '@/components/form/UploadFile';
 import { facultyList } from '@/contents/faculty';
 import { majorList } from '@/contents/major';
 import * as React from 'react';
@@ -13,8 +14,10 @@ import { serialize } from 'object-to-formdata';
 import { Button } from '@/components/nextui-extend-variants/Button';
 import NextImage from '@/components/NextImage';
 import { DANGER_TOAST, showToast } from '@/components/Toast';
+import withAuth from '@/components/hoc/withAuth';
 
-export default function UploadModulePage() {
+export default withAuth(UploadModulePage, 'private');
+function UploadModulePage() {
   const methods = useForm<AddModuleRequest>({
     mode: 'onTouched',
     defaultValues: {
@@ -70,7 +73,7 @@ export default function UploadModulePage() {
   };
 
   return (
-    <main className='w-full min-h-screen flex flex-col items-center bg-white p-12 pt-16 gap-20 pb-16 relative'>
+    <main className='w-full min-h-screen flex flex-col items-center bg-white px-12 lg:px-36 pt-16 gap-20 pb-16 relative'>
       <NextImage
         src='/module/upload/awan.png'
         alt='awan'
@@ -79,8 +82,10 @@ export default function UploadModulePage() {
         className='absolute bottom-0 right-0 z-0 max-md:w-44 max-md:h-auto'
       />
       <section className='w-full lg:w-3/5 h-fit flex flex-col items-center text-center text-gray-600 gap-5'>
-        <h1 className='font-semibold lg:text-6xl text-2xl'>Upload Module</h1>
-        <h5 className='text-medium lg:text-2xl font-medium'>
+        <h1 className='font-semibold lg:text-6xl text-2xl text-black'>
+          Upload Module
+        </h1>
+        <h5 className='text-medium lg:text-2xl font-medium text-black'>
           Upload your learning modules in just a few clicks and reach people
           seeking new learning resources.
         </h5>
@@ -88,9 +93,9 @@ export default function UploadModulePage() {
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-full lg:w-4/5 h-fit flex lg:flex-row flex-col items-center lg:justify-between'
+          className='w-full h-fit flex lg:flex-row flex-col items-start gap-24 lg:justify-between'
         >
-          <section className='w-full lg:w-2/5 h-full flex flex-col items-start gap-6'>
+          <section className='w-full lg:w-1/2 h-full flex flex-col items-start gap-6'>
             <Input
               id='title'
               label='Module Name'
@@ -161,11 +166,24 @@ export default function UploadModulePage() {
               })}
               errorMessage={errors.description?.message}
             />
-            <Button type='submit' isLoading={isPending}>
+          </section>
+          <section className='w-full first-letter:lg:w-1/2 h-full flex flex-col gap-[18px] items-center'>
+            <UploadFile
+              id='file'
+              title='Upload Module'
+              description='Click or drag and drop to upload'
+              variant='md'
+              supportFiles={['.pdf', '.doc', '.docx']}
+              accept={{
+                'image/png': ['.pdf', '.doc', '.docx'],
+              }}
+              maxSize={2000000}
+              isRequired={true}
+            />
+            <Button type='submit' fullWidth isLoading={isPending}>
               Publish Module
             </Button>
           </section>
-          <section className='w-full first-letter:lg:w-2/5 h-full flex flex-row items-center'></section>
         </form>
       </FormProvider>
     </main>

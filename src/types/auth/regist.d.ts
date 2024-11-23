@@ -4,7 +4,7 @@ export type RegisterRequest = {
   username: string;
   email: string;
   faculty: string;
-  major: string;
+  department: string;
   password: string;
 };
 
@@ -13,7 +13,7 @@ export type RegisterResponse = ApiResponse<{
   username: string;
   email: string;
   faculty: string;
-  major: string;
+  department: string;
   password: string;
   passwordResetToken: null;
   passwordResetExpires: null;

@@ -11,7 +11,7 @@ export type LoginResponse = ApiResponse<{
     username: string;
     email: string;
     faculty: string;
-    major: string;
+    department: string;
     uploadedModules: [
       {
         id: string;

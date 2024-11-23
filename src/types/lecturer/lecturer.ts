@@ -27,3 +27,14 @@ export type LecturerFilter = {
 };
 export type LecturerResponse = ApiResponse<LecturerDetail>;
 export type LecturerListResponse = ApiResponse<LecturerDetail[]>;
+
+export type LectureComment = {
+  id: string;
+  feedback: string;
+  rating: number;
+  userId: string;
+  lecturerId: string;
+  moduleId: string;
+  createdAt: string;
+  updatedAt: string;
+};

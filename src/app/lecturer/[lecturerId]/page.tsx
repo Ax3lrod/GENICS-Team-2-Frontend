@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import Navbar from '@/layouts/Navbar';
 import NextImage from '@/components/NextImage';
 import { Button } from '@/components/nextui-extend-variants/Button';
-import { FiFileText } from 'react-icons/fi';
 import Input from '@/components/form/Input';
 import { IoMdStarOutline, IoMdStar } from 'react-icons/io';
 import { FaRegCircleUser } from 'react-icons/fa6';
-import { ModuleDetailProps, ModuleComment } from '@/types/module/module';
+import { LecturerDetail, LectureComment } from '@/types/lecturer/lecturer';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { CommentRequest } from '@/types/comment/comment';
 import { serialize } from 'object-to-formdata';
@@ -22,19 +21,19 @@ import { DANGER_TOAST, showToast } from '@/components/Toast';
 import withAuth from '@/components/hoc/withAuth';
 import useAuthStore from '@/stores/useAuthStore';
 
-export default withAuth(ModuleDetailPage, 'private');
-function ModuleDetailPage() {
+export default withAuth(LecturerDetailPage, 'private');
+function LecturerDetailPage() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
-  const moduleId = usePathname().split('/').pop();
+  const lecturerId = usePathname().split('/').pop();
 
-  const { data: moduleData } = useQuery({
-    queryKey: ['module', moduleId],
+  const { data: lecturerData } = useQuery({
+    queryKey: ['module', lecturerId],
     queryFn: async () => {
       try {
-        const { data } = await api.get<ApiResponse<ModuleDetailProps>>(
-          `/modules/${moduleId}`,
+        const { data } = await api.get<ApiResponse<LecturerDetail>>(
+          `/lecturers/${lecturerId}`,
         );
 
         return data.responseObject;
@@ -45,12 +44,12 @@ function ModuleDetailPage() {
     },
   });
 
-  const { data: moduleCommentsData } = useQuery({
-    queryKey: ['moduleComments', moduleId],
+  const { data: lecturerCommentsData } = useQuery({
+    queryKey: ['moduleComments', lecturerId],
     queryFn: async () => {
       try {
-        const { data } = await api.get<ApiResponse<ModuleComment[]>>(
-          `/comments/module/${moduleId}`,
+        const { data } = await api.get<ApiResponse<LectureComment[]>>(
+          `/comments/lecturer/${lecturerId}`,
         );
 
         return data.responseObject;
@@ -116,20 +115,43 @@ function ModuleDetailPage() {
         feedback: data.feedback,
         rating: rating,
         userId: user?.user.id,
-        lecturerId: 'unasigned',
-        moduleId: moduleId as string,
+        lecturerId: lecturerId,
+        moduleId: 'unasigned',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }),
     );
   };
 
-  return moduleData ? (
+  return lecturerData ? (
     <main className='w-screen min-h-screen bg-[#f7f7f7]'>
       <Navbar />
 
+      {/* Hero Section */}
+      <section className='w-full h-fit flex flex-row px-8 py-16 justify-center items-center'>
+        <div className='flex flex-col h-fit w-fit justify-center items-center'>
+          <h1 className='text-lg md:text-4xl font-bold text-black '>
+            Lecturer Details
+          </h1>
+          <p className='text-[9px] md:text-base text-start md:text-center max-w-[250px] md:max-w-[450px]'>
+            View your lecturer profile, create assessment statistics, and
+            introspect with each other only on ShareITS.
+          </p>
+        </div>
+        <div className='flex z-0 w-fit h-fit'>
+          <NextImage
+            src='/lecturer/lecturer-detail/hero.png'
+            alt='Hero'
+            width={138}
+            height={145}
+            className='flex z-0 w-[138px] h-[145px] lg:w-auto lg:h-[556px]'
+            imgClassName='flex z-0 w-[138px] h-[145px] lg:w-auto lg:h-[556px]'
+          />
+        </div>
+      </section>
+
       {/* Module Detail Section */}
-      <section className='w-full h-fit min-h-[600px] bg-primary-500 rounded-xl mt-10 relative text-primary-50 flex flex-col justify-center items-center py-24 gap-y-8'>
+      <section className='w-full h-fit min-h-[600px] bg-primary-500 rounded-xl mt-10 relative text-primary-50 flex flex-col justify-center items-center py-[30px] px-20 gap-y-8'>
         <NextImage
           src='/module/module-detail/awan1.png'
           alt='Awan1'
@@ -165,28 +187,26 @@ function ModuleDetailPage() {
           height={154.12}
           className='absolute bottom-0 left-10 z-0 max-md:w-[150px] max-md:h-[77.06px] max-md:left-5'
         />
-        <section className='w-[60%] flex justify-center text-center flex-col gap-y-4 z-10'>
-          <h1 className='font-bold text-4xl'>{moduleData.title}</h1>
-          <h5 className='text-xl'>by {moduleData.user?.username}</h5>
-        </section>
-        <section className='w-[70%] h-fit flex justify-center text-center z-10'>
-          <p className='text-xl'>{moduleData.description}</p>
-        </section>
+        <div className='flex flex-col z-10 rounded-[10px] w-full h-[674px] bg-[#E6F7F9] gap-[60px] justify-center items-center'>
+          <div className='w-[60%] flex justify-center text-center flex-col gap-y-4 z-10'>
+            <h1 className='font-bold text-4xl text-primary-500'>
+              {lecturerData.name}
+            </h1>
+            <h5 className='text-xl text-primary-500'>Lecturer</h5>
+          </div>
+          <div className='w-[70%] h-fit flex flex-col justify-center text-center z-10'>
+            <h5 className='text-xl font-bold text-black'>Faculty</h5>
+            <p className='text-xl text-black'>{lecturerData.faculty}</p>
+          </div>
+          <div className='w-[70%] h-fit flex flex-col justify-center text-center z-10'>
+            <h5 className='text-xl font-bold text-black'>Department</h5>
+            <p className='text-xl text-black'>{lecturerData.department}</p>
+          </div>
+        </div>
       </section>
 
       {/* Download and Feedback Post */}
       <section className='w-full h-fit flex flex-col justify-center items-center gap-20 py-20'>
-        {/* Download Section */}
-        <section className='bg-[#E6F7F9] flex flex-col justify-center items-center w-1/3 max-md:w-[90%] h-fit rounded-lg shadow-[3px_6px_20px_rgba(0,0,0,0.20)] py-14 gap-6'>
-          <h2 className='font-semibold text-primary-500 text-3xl'>
-            Get Your File Here
-          </h2>
-          <Button className='gap-2'>
-            <FiFileText />
-            Get Your File.pdf
-          </Button>
-        </section>
-
         {/* Feedback Section */}
         <FormProvider {...methods}>
           <form
@@ -228,7 +248,7 @@ function ModuleDetailPage() {
 
       {/* Users Feedback Section */}
       <section className='bg-primary-500 w-full h-fit min-h-[430px] flex items-center pl-7 overflow-x-scroll'>
-        {moduleCommentsData?.map((comment) => (
+        {lecturerCommentsData?.map((comment) => (
           <div
             key={comment.id}
             className='h-[330px] bg-primary-50 w-[700px] rounded-xl mr-5'

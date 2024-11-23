@@ -33,7 +33,7 @@ export default function Auth() {
           >
             Sign Up
           </Button>
-          <p className='text-xs lg:text-2xl'>
+          <p className='text-xs md:text-2xl'>
             Already have an account?{' '}
             <Link href='/auth/login'>
               <span className='text-primary-500 font-semibold'>Log in</span>

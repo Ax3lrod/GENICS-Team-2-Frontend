@@ -12,7 +12,6 @@ import { facultyList } from '@/contents/faculty';
 import { majorList } from '@/contents/major';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import LogoGoogle from '@/contents/LogoGoogle';
-import { IoArrowBackCircleOutline } from 'react-icons/io5';
 import { REG_EMAIL, REG_PASSWORD } from '@/contents/regex';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { useRegistMutation } from './hooks/mutation';
@@ -44,7 +43,7 @@ export default function Register() {
         username: data.email,
         email: data.email,
         faculty: data.faculty,
-        major: data.major,
+        department: data.department,
         password: data.password,
       }),
     );
@@ -59,8 +58,8 @@ export default function Register() {
         onSubmit={handleSubmit(onSubmit)}
         className='w-full h-full lg:w-screen lg:h-screen flex bg-white'
       >
-        <div className='flex flex-col w-full h-full lg:w-screen lg:h-screen justify-center items-center lg:flex-row bg-white'>
-          <section className='relative flex flex-col justify-center items-center w-full h-full '>
+        <div className='flex flex-col w-full h-full lg:w-screen lg:h-fit justify-center items-center lg:flex-row bg-white'>
+          <section className='relative hidden lg:flex flex-col justify-center items-center w-full h-full '>
             <div className='w-full h-full'>
               <NextImage
                 src='/register/background.png'
@@ -70,7 +69,7 @@ export default function Register() {
                 className='w-full h-full'
                 imgClassName='w-full h-full'
               />
-              <div className='absolute z-0 w-fit h-fit top-11 left-11'>
+              <div className='absolute z-0 w-fit h-fit top-12 left-[91px]'>
                 <NextImage
                   src='/register/logo-white.png'
                   alt='Asset register'
@@ -79,7 +78,7 @@ export default function Register() {
                   className='max-w-full h-auto'
                 />
               </div>
-              <div className='absolute z-0 w-fit h-fit top-[136px] left-[309px]'>
+              <div className='absolute z-10 w-fit h-fit top-[198px] left-[309px]'>
                 <NextImage
                   src='/register/asset-1.png'
                   alt='Asset register'
@@ -97,13 +96,13 @@ export default function Register() {
                   className='max-w-full h-full'
                 />
               </div>
-              <div className='absolute z-0 w-fit h-fit top-[300px] md:top-[473px] left-10'>
+              <div className='absolute z-0 w-fit h-fit top-[473px] left-10'>
                 <NextImage
                   src='/register/person.png'
                   alt='Asset register'
                   width={478}
                   height={394}
-                  className='w-[250px] h-auto md:w-[478px] lg:w-[350px] md:h-auto'
+                  className='w-[250px] h-auto md:w-[478px] md:h-auto'
                 />
               </div>
               <div className='absolute z-0 w-fit h-fit bottom-[31px] left-[508px] lg:left-[450px]'>
@@ -118,13 +117,26 @@ export default function Register() {
             </div>
           </section>
           <section className='flex flex-col justify-center items-center w-full h-full py-[93px] px-[32px] md:px-[109px] gap-[30px] lg:overflow-y-auto'>
-            <div className='relative flex flex-row justify-center items-center w-full h-full'>
-              <Link href='/auth'>
-                <IoArrowBackCircleOutline className='absolute w-[49px] h-[49px] left-0 -translate-x-24' />
+            <div className='relative flex flex-col justify-center items-center w-full h-full pt-24 lg:pt-0'>
+              <Link href='/'>
+                <NextImage
+                  src='/login/loginbackbutton.png'
+                  alt='Back Button'
+                  width={49}
+                  height={49}
+                  className='absolute hidden lg:block w-[49px] h-[49px] left-0 -translate-x-24'
+                />
+                <NextImage
+                  src='/login/logo_mobile.png'
+                  alt='Logo ShareITS'
+                  width={75.72}
+                  height={43.37}
+                  className='absolute lg:hidden top-8 left-10'
+                />
               </Link>
               <p className='text-5xl font-semibold lg:text-4xl'>
                 {' '}
-                Create your Account{' '}
+                Create Your Account{' '}
               </p>
             </div>
             <div className='flex flex-col w-full h-full gap-11'>
@@ -231,13 +243,13 @@ export default function Register() {
               </div>
               <div className='flex w-full h-full'>
                 <Select
-                  id='major'
-                  label='Major'
+                  id='department'
+                  label='Department'
                   isRequired
                   labelPlacement='outside'
                   placeholder='Input your major'
                   variant='bordered'
-                  {...register('major')}
+                  {...register('department')}
                 >
                   {majorList
                     .filter((item) => item.faculty == faculty)
