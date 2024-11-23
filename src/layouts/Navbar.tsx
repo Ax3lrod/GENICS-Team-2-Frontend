@@ -117,12 +117,7 @@ function NavbarLayout() {
             </Button>
           </NavbarItem>
           <NavbarItem>
-            <Button
-              as={Link}
-              color='primary'
-              href='/auth/register'
-              variant='bordered'
-            >
+            <Button as={Link} color='primary' href='/auth' variant='bordered'>
               Sign Up
             </Button>
           </NavbarItem>
@@ -201,7 +196,7 @@ function NavbarLayout() {
             <Button
               as={Link}
               color='primary'
-              href='/auth/register'
+              href='/auth'
               variant='bordered'
               className='w-full'
             >

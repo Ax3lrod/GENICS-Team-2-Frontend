@@ -63,6 +63,15 @@ export type ModuleRequest = {
   downvotes: number;
 };
 
+export type UploadModuleRequest = {
+  title: string;
+  description: string;
+  faculty: string;
+  department: string;
+  course: string;
+  file: string;
+};
+
 export type ModuleResponse = ApiResponse<{
   id: string;
   title: string;

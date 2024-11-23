@@ -31,7 +31,6 @@ export const useLoginMutation = () => {
         ...res.data.responseObject,
         token: res.data.responseObject.token,
       });
-
       return res.data;
     },
 

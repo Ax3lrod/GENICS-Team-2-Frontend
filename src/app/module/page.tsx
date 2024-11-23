@@ -47,7 +47,7 @@ function ModuleList() {
             actionButtonLabel='Upload'
             actionButtonIcon={<FiUpload className='h-4 md:h-6 w-4 md:w-6' />}
             onChangeFilter={setFilterData}
-            onActionButtonClick={() => router.push('/module/upload-module')}
+            onActionButtonClick={() => router.push('/module/upload')}
           />
         </div>
 
