@@ -4,7 +4,7 @@ export interface User {
     username: string;
     email: string;
     faculty: string;
-    major: string;
+    department: string;
     uploadedModules: [
       {
         id: string;
@@ -40,7 +40,7 @@ export interface MyProfile {
   username: string;
   email: string;
   faculty: string;
-  major: string;
+  department: string;
   password: string;
   uploadedModules: [
     {
@@ -76,7 +76,7 @@ export interface MyProfile {
   username: string;
   email: string;
   faculty: string;
-  major: string;
+  department: string;
   password: string;
   uploadedModules: [
     {

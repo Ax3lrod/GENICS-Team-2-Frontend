@@ -3,7 +3,8 @@
 import { useMutation } from '@tanstack/react-query';
 
 import api from '@/lib/api';
-import { ModuleDetail, ModuleResponse } from '@/types/module/module';
+import { UpVoteResponse, UpVoteRequest } from '@/types/module/upvote';
+import { DownVoteResponse, DownVoteRequest } from '@/types/module/downvote';
 
 export const useModulesMutation = () => {
   const {
@@ -12,10 +13,10 @@ export const useModulesMutation = () => {
     isPending: isPendingUpvote,
     data: upvoteData,
     isError: isErrorUpvote,
-  } = useMutation<ModuleDetail, Error, string>({
+  } = useMutation<UpVoteRequest, Error, string, number>({
     mutationKey: ['upvote-module'],
-    mutationFn: async (moduleId: string) => {
-      const response = await api.post<ModuleResponse>(
+    mutationFn: async (moduleId) => {
+      const response = await api.post<UpVoteResponse>(
         `modules/${moduleId}/upvotes`,
       );
       return response.data?.responseObject;
@@ -28,10 +29,10 @@ export const useModulesMutation = () => {
     isPending: isPendingDownvote,
     data: downvoteData,
     isError: isErrorDownvote,
-  } = useMutation<ModuleDetail, Error, string>({
+  } = useMutation<DownVoteRequest, Error, string, number>({
     mutationKey: ['downvote-module'],
-    mutationFn: async (moduleId: string) => {
-      const response = await api.post<ModuleResponse>(
+    mutationFn: async (moduleId) => {
+      const response = await api.post<DownVoteResponse>(
         `modules/${moduleId}/downvotes`,
       );
       return response.data?.responseObject;
