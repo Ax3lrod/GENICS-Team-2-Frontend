@@ -21,6 +21,7 @@ import api from '@/lib/api';
 import { DANGER_TOAST, showToast } from '@/components/Toast';
 import withAuth from '@/components/hoc/withAuth';
 import useAuthStore from '@/stores/useAuthStore';
+import { Link } from '@nextui-org/react';
 
 export default withAuth(ModuleDetailPage, 'private');
 function ModuleDetailPage() {
@@ -181,7 +182,13 @@ function ModuleDetailPage() {
           <h2 className='font-semibold text-primary-500 text-3xl'>
             Get Your File Here
           </h2>
-          <Button className='gap-2'>
+          <Button
+            className='gap-2'
+            as={Link}
+            color='primary'
+            href={`https://asv-monitor.me/files${moduleData.filePath}`}
+            variant='solid'
+          >
             <FiFileText />
             Get Your File.pdf
           </Button>

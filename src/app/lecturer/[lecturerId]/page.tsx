@@ -134,7 +134,7 @@ function LecturerDetailPage() {
             Lecturer Details
           </h1>
           <p className='text-[9px] md:text-base text-start md:text-center max-w-[250px] md:max-w-[450px]'>
-            View your lecturer profile, create assessment statistics, and
+            View your lecturer&apos;s profile, create assessment statistics, and
             introspect with each other only on ShareITS.
           </p>
         </div>

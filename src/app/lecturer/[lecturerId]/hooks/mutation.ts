@@ -12,7 +12,10 @@ export const useCommentMutation = () => {
     isPending,
   } = useMutation<CommentResponse, AxiosError<ApiError>, CommentRequest>({
     mutationFn: async (data) => {
-      const res = await api.post<CommentResponse>('/comments', data);
+      const res = await api.post<CommentResponse>('/comments', data, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 60000,
+      });
 
       return res.data;
     },

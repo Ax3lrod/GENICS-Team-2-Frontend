@@ -1,7 +1,8 @@
 'use client';
 
 import api from '@/lib/api';
-import { ModuleDetail, ModuleListResponse } from '@/types/module/module';
+import { ModuleDetail, AllModuleResponse } from '@/types/module/module';
+import { ApiResponse } from '@/types/api';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
@@ -25,11 +26,11 @@ export const useModulesQuery = ({
     queryFn: async () => {
       let res;
       if (search || sort) {
-        res = await api.get<ModuleListResponse>('/modules/search', {
+        res = await api.get<ApiResponse<AllModuleResponse>>('/modules/search', {
           params: { query: search, sort: sort ? sort : null },
         });
       } else {
-        res = await api.get<ModuleListResponse>('/modules');
+        res = await api.get<ApiResponse<AllModuleResponse>>('/modules');
       }
       return res.data.responseObject;
     },

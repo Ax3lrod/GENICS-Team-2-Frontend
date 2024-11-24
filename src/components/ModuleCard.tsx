@@ -56,15 +56,15 @@ export default function ModuleCard({
 
   useEffect(() => {
     if (upvoteData) {
-      setUpVote(upvoteData?.upVote);
-      setDownVote(upvoteData?.downVote);
+      setUpVote(upvoteData?.upvotes);
+      setDownVote(upvoteData?.downvotes);
     }
   }, [upvoteData]);
 
   useEffect(() => {
     if (downvoteData) {
-      setUpVote(downvoteData?.upVote);
-      setDownVote(downvoteData?.downVote);
+      setUpVote(downvoteData?.upvotes);
+      setDownVote(downvoteData?.downvotes);
     }
   }, [downvoteData]);
 
