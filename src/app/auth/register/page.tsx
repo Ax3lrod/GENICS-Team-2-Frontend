@@ -56,7 +56,7 @@ export default function Register() {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='w-full h-full lg:w-screen lg:h-screen flex bg-white'
+        className='w-full h-full lg:w-screen lg:h-screen flex bg-white overflow-x-hidden'
       >
         <div className='flex flex-col w-full h-full lg:w-screen lg:h-fit justify-center items-center lg:flex-row bg-white'>
           <section className='relative hidden lg:flex flex-col justify-center items-center w-full h-full '>
@@ -66,8 +66,6 @@ export default function Register() {
                 alt='Asset register'
                 width={747}
                 height={1026}
-                className='w-full h-full'
-                imgClassName='w-full h-full'
               />
               <div className='absolute z-0 w-fit h-fit top-12 left-[91px]'>
                 <NextImage
@@ -116,8 +114,8 @@ export default function Register() {
               </div>
             </div>
           </section>
-          <section className='flex flex-col justify-center items-center w-full h-full py-[93px] px-[32px] md:px-[109px] gap-[30px] lg:overflow-y-auto'>
-            <div className='relative flex flex-col justify-center items-center w-full h-full pt-24 lg:pt-0'>
+          <section className='flex flex-col items-center w-full h-full px-[32px] md:px-[109px] gap-[30px]'>
+            <div className='relative flex flex-col items-center w-full h-full pt-24 lg:pt-0'>
               <Link href='/'>
                 <NextImage
                   src='/login/loginbackbutton.png'
