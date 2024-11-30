@@ -6,7 +6,7 @@ export type CommentRequest = {
   rating: number;
   userId?: string;
   lecturerId?: string;
-  moduleId: string;
+  moduleId?: string;
   createdAt: string;
   updatedAt: string;
 };

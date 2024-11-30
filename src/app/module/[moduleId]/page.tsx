@@ -117,7 +117,7 @@ function ModuleDetailPage() {
         feedback: data.feedback,
         rating: rating,
         userId: user?.user.id,
-        lecturerId: 'unasigned',
+        lecturerId: undefined,
         moduleId: moduleId as string,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
