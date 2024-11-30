@@ -15,6 +15,7 @@ import { Button } from '@/components/nextui-extend-variants/Button';
 import NextImage from '@/components/NextImage';
 import { DANGER_TOAST, showToast } from '@/components/Toast';
 import withAuth from '@/components/hoc/withAuth';
+import Link from 'next/link';
 
 export default withAuth(UploadModulePage, 'private');
 function UploadModulePage() {
@@ -74,8 +75,24 @@ function UploadModulePage() {
 
   return (
     <main className='w-full min-h-screen flex flex-col items-center bg-white px-12 lg:px-36 pt-16 gap-20 pb-16 relative'>
+      <Link href='/'>
+        <NextImage
+          src='/login/loginbackbutton.png'
+          alt='Back Button'
+          width={49}
+          height={49}
+          className='absolute hidden lg:block w-[49px] h-[49px] left-10 top-10'
+        />
+        <NextImage
+          src='/login/logo_mobile.png'
+          alt='Logo ShareITS'
+          width={75.72}
+          height={43.37}
+          className='absolute lg:hidden top-8 left-10'
+        />
+      </Link>
       <NextImage
-        src='/module/upload/awan.png'
+        src='/module/upload/Awan.png'
         alt='awan'
         width={296.096}
         height={196.499}
