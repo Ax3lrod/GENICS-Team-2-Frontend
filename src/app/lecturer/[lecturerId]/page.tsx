@@ -116,7 +116,7 @@ function LecturerDetailPage() {
         rating: rating,
         userId: user?.user.id,
         lecturerId: lecturerId,
-        moduleId: 'unasigned',
+        moduleId: undefined,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }),
