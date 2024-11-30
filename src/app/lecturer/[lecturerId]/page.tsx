@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/layouts/Navbar';
 import NextImage from '@/components/NextImage';
 import { Button } from '@/components/nextui-extend-variants/Button';
@@ -44,7 +44,7 @@ function LecturerDetailPage() {
     },
   });
 
-  const { data: lecturerCommentsData } = useQuery({
+  const { data: lecturerCommentsData, refetch: refetchComments } = useQuery({
     queryKey: ['moduleComments', lecturerId],
     queryFn: async () => {
       try {
@@ -98,7 +98,11 @@ function LecturerDetailPage() {
 
   const { handleSubmit } = methods;
 
-  const { handleComment, isPending } = useCommentMutation();
+  const {
+    handleComment,
+    isPending,
+    isSuccess: isSuccessPostComment,
+  } = useCommentMutation();
 
   const generateCommentId = () => {
     return `comment_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
@@ -122,6 +126,12 @@ function LecturerDetailPage() {
       }),
     );
   };
+
+  useEffect(() => {
+    if (isSuccessPostComment) {
+      refetchComments();
+    }
+  }, [isSuccessPostComment, refetchComments]);
 
   return lecturerData ? (
     <main className='w-screen min-h-screen bg-[#f7f7f7]'>
