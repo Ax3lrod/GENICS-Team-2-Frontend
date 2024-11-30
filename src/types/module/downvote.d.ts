@@ -5,8 +5,8 @@ export type DownVoteRequest = {
   name: string;
   faculty: string;
   department: string;
-  upvotes: number;
-  downvotes: number;
+  upVote: number;
+  downVote: number;
 };
 
 export type DownVoteResponse = ApiResponse<{
@@ -14,6 +14,6 @@ export type DownVoteResponse = ApiResponse<{
   name: string;
   faculty: string;
   department: string;
-  upvotes: number;
-  downvotes: number;
+  upVote: number;
+  downVote: number;
 }>;
